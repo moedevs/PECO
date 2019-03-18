@@ -6,6 +6,16 @@ public class PlayerController : MonoBehaviour
     private GameObject controlledPawn;
     private CharacterController pawnController;
     public Camera pawnCamera;
+    private RaycastHit hitObj;
+
+
+    public float speed = 12.0f;
+    public float turnSpeed = 5f;
+    public float jumpSpeed = 15.0f;
+    public float gravity = 20.0f;
+    Vector3 moveDirection;
+    Vector3 moveRotation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,15 +30,42 @@ public class PlayerController : MonoBehaviour
     {
         if (controlledPawn != null)
         {
-            MoveForward();
+            Movement();
+            RayTrace();
         }
     }
 
-    private void MoveForward()
+    private void RayTrace()
     {
-        if (Input.GetKeyDown("w"))
+
+        if (Input.GetMouseButton(0))
         {
-            pawnController.Move(new Vector3(0, 0, 1));
+            if (Physics.Raycast(controlledPawn.transform.position, controlledPawn.transform.forward, out hitObj, 50, 1))
+            {
+                Debug.DrawRay(controlledPawn.transform.position, controlledPawn.transform.forward * 50f, Color.red);
+                print(hitObj.collider.gameObject.name);
+            }
         }
+    }
+
+    private void Movement()
+    {
+        moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
+        moveDirection = controlledPawn.transform.TransformVector(moveDirection);
+        moveDirection = moveDirection * speed;
+
+        moveRotation = new Vector3(0.0f, Input.GetAxis("Horizontal"), 0.0f);
+
+        if (Input.GetButton("Jump"))
+        {
+            moveDirection.y = jumpSpeed;
+        }
+
+        // Apply gravity
+        moveDirection.y = moveDirection.y - ((gravity*6) * Time.deltaTime);
+
+        // Move the controller
+        pawnController.Move(moveDirection * Time.deltaTime);
+        pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
     }
 }
