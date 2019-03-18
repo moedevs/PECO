@@ -48,26 +48,26 @@ public class PlayerController : MonoBehaviour
         //converts move direction to world space
         moveDirection = controlledPawn.transform.TransformVector(moveDirection);
         moveDirection = moveDirection * speed;
-        
+
         pawnController.Move(moveDirection * Time.deltaTime);
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
     }
 
     private void RayTrace()
     {
-        Debug.DrawRay(controlledPawn.transform.position, controlledPawn.transform.forward * 10f, Color.red);
+        var position = controlledPawn.transform.position;
+        var forward = controlledPawn.transform.forward;
+
+        Debug.DrawRay(position, forward * 10f, Color.red);
 
         //on LMB 
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0)) return;
+        //if hit object is tagged as controllable, possess it 
+        if (!Physics.Raycast(position, forward, out hitObj, 100, 1)) return;
+
+        if (hitObj.transform.gameObject.CompareTag("PlayerControllable"))
         {
-            //if hit object is tagged as controllable, possess it 
-            if (Physics.Raycast(controlledPawn.transform.position, controlledPawn.transform.forward, out hitObj, 100, 1))
-            {
-                if (hitObj.transform.gameObject.tag == "PlayerControllable")
-                {
-                    ChangeControlledPawn(hitObj.transform.gameObject);
-                }
-            }
+            ChangeControlledPawn(hitObj.transform.gameObject);
         }
     }
 
