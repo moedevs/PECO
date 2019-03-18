@@ -2,7 +2,7 @@
 ## PECO
 
 ### Design Doc 
-You can find the design doc for PECO<a href="https://docs.google.com/document/d/1e8xRC-qYgIWQ6_b9QR8jcXFQeY30VqKpXcBFvRD1Qvs/edit">here.</a>
+You can find the design doc for PECO <a href="https://docs.google.com/document/d/1e8xRC-qYgIWQ6_b9QR8jcXFQeY30VqKpXcBFvRD1Qvs/edit">here.</a>
 
 ### Helping out
 Not a programmer? No problem, We would still love to get your input!
