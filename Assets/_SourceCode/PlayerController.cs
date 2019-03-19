@@ -74,10 +74,12 @@ public class PlayerController : MonoBehaviour
     //sets controlled pawn to new pawn, resets camera on new pawn
     private void ChangeControlledPawn(GameObject newPawn)
     {
+        var temp = controlledPawn;
         controlledPawn = newPawn;
         pawnController = controlledPawn.GetComponent<CharacterController>();
         pawnCamera.transform.SetParent(controlledPawn.transform);
         pawnCamera.transform.localPosition = CameraPosition;
-        pawnCamera.transform.rotation = controlledPawn.transform.rotation * Quaternion.Euler(15f, 0f, 0f);
+        pawnCamera.transform.rotation = controlledPawn.transform.rotation * Quaternion.Euler(15.0f, 0f, 0f);
+        pawnController.transform.rotation = temp.transform.rotation;
     }
 }
