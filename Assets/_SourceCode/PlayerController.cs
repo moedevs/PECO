@@ -63,20 +63,8 @@ public class PlayerController : MonoBehaviour
 
         pawnController.Move(moveDirection * Time.deltaTime);
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            GameObject objectq;
-            var sneak = new Sneak();
-            _effects.Add("Sneak", sneak);
-            ChangeAlpha(0.5f);
-        }
 
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            _effects.Remove("Sneak");
-            ChangeAlpha(1f);
-        }
+        Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
 
         ApplyEffects();
     }
@@ -105,6 +93,19 @@ public class PlayerController : MonoBehaviour
         {
             ChangeControlledPawn(hitObj.transform.gameObject);
         }
+    }
+
+    private void OnSneakBegin()
+    {
+        var sneak = new Sneak();
+        _effects.Add("Sneak", sneak);
+        ChangeAlpha(0.5f);
+    }
+
+    private void OnSneakEnd()
+    {
+        _effects.Remove("Sneak");
+        ChangeAlpha(1f);
     }
 
     /**
