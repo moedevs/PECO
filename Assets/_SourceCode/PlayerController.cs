@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
-using UnityScript.Lang;
 using System.Linq;
-using UnityEngine.Experimental.UIElements;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     //playercontroller functionality 
     private GameObject controlledPawn;
+    private Rigidbody pawnRigidbody;
     private CharacterController pawnController;
     public Camera pawnCamera;
     private RaycastHit hitObj;
@@ -16,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     private const float baseSpeed = 12.0f;
     public float speed = baseSpeed;
     public float turnSpeed = 2f;
+    public float jumpStrength = 5.5f;
     Vector3 moveDirection;
     Vector3 moveRotation;
 
@@ -39,12 +38,25 @@ public class PlayerController : MonoBehaviour {
         //force set the cameras position 
         pawnCamera.transform.rotation = Quaternion.Euler(15f, 0f, 0f);
         pawnCamera.transform.localPosition = CameraPosition;
+
+        if (controlledPawn.GetComponent<Rigidbody>())
+        {
+            pawnRigidbody = controlledPawn.GetComponent<Rigidbody>();
+        }
     }
 
-    void Update() {
-        if (controlledPawn == null) return;
-
-        Movement();
+    void FixedUpdate()
+    {
+        if (controlledPawn == null)
+            return;
+        if (pawnRigidbody != null)
+        {
+            RBMovement();
+        }
+        else
+        {
+            Movement();
+        }
         RayTrace();
     }
 
@@ -60,11 +72,42 @@ public class PlayerController : MonoBehaviour {
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
 
         Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
-
         ApplyEffects();
     }
 
-    private void ChangeAlpha(float alpha) {
+    private void RBMovement()
+    {
+        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
+
+        //converts move direction to world space
+        moveDirection = controlledPawn.transform.TransformVector(moveDirection);
+        moveDirection = moveDirection * speed;
+
+        //moves the rigidbody based on player input, should comply with collision checks
+        pawnRigidbody.MovePosition(controlledPawn.transform.position += moveDirection * Time.deltaTime);
+
+        //rotates rigidbody based on camera axis input
+        pawnRigidbody.MoveRotation(Quaternion.Euler(moveRotation * turnSpeed) * controlledPawn.transform.rotation);
+
+        if (Input.GetButtonDown("Jump") && IsGrounded())
+        {
+            pawnRigidbody.AddRelativeForce(controlledPawn.transform.up * jumpStrength, ForceMode.Impulse);
+        }
+
+        Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
+        ApplyEffects();
+    }
+
+    private bool IsGrounded()
+    {
+        //check if the player is more than 0.1f above the ground, if so, they cannot jump
+        return Physics.Raycast(controlledPawn.transform.position, -controlledPawn.transform.up, controlledPawn.GetComponent<Collider>().bounds.extents.y + 0.1f);
+    }
+
+
+    private void ChangeAlpha(float alpha)
+    {
         var mat = pawnController.GetComponent<Renderer>().material;
         var oldColor = mat.color;
         var newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
@@ -112,13 +155,25 @@ public class PlayerController : MonoBehaviour {
     private void ChangeControlledPawn(GameObject newPawn) {
         var temp = controlledPawn;
         controlledPawn = newPawn;
-        pawnController = controlledPawn.GetComponent<CharacterController>();
+
+
+        if (newPawn.GetComponent<Rigidbody>())
+        {
+            pawnRigidbody = newPawn.GetComponent<Rigidbody>();
+        }
+        else
+        {
+            pawnRigidbody = null;
+            pawnController = controlledPawn.GetComponent<CharacterController>();
+        }
         pawnCamera.transform.SetParent(controlledPawn.transform);
         pawnCamera.transform.localPosition = CameraPosition;
         pawnCamera.transform.rotation = controlledPawn.transform.rotation * Quaternion.Euler(15.0f, 0f, 0f);
 
         // retain current rotation
         pawnController.transform.rotation = temp.transform.rotation;
+
+
     }
 
 }
