@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour {
     Vector3 moveDirection;
     Vector3 moveRotation;
 
-    private bool paused = false;
-
     /**
      * Speed modifiers for now, this will be
      * generalized later on
@@ -48,7 +46,6 @@ public class PlayerController : MonoBehaviour {
 
         Movement();
         RayTrace();
-        MouseLock();
     }
 
     private void Movement() {
@@ -124,17 +121,4 @@ public class PlayerController : MonoBehaviour {
         pawnController.transform.rotation = temp.transform.rotation;
     }
 
-    private void MouseLock() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            paused = !paused;
-        }
-        if (paused) {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            return;
-        }
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
-    }
 }

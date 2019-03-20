@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
    
     public static GameManager gm;
 
+    private bool paused = false;
+
     private void Awake() {
         if(gm == null) {
             gm = this;
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour {
 
     private void Update() {
         //Test();
+        MouseLock();
     }
 
     private void Test() {
@@ -39,4 +42,17 @@ public class GameManager : MonoBehaviour {
         Application.Quit();
     }
 
+    private void MouseLock() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            paused = !paused;
+        }
+        if (paused) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            return;
+        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+    }
 }
