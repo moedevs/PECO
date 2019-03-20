@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour {
         } else {
             Destroy(this.gameObject);
         }
-
-        LockMouseCursor();
     }
 
     private void Update() {
