@@ -5,8 +5,7 @@ using UnityScript.Lang;
 using System.Linq;
 using UnityEngine.Experimental.UIElements;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     //playercontroller functionality 
     private GameObject controlledPawn;
     private CharacterController pawnController;
@@ -20,6 +19,8 @@ public class PlayerController : MonoBehaviour
     Vector3 moveDirection;
     Vector3 moveRotation;
 
+    private bool paused = false;
+
     /**
      * Speed modifiers for now, this will be
      * generalized later on
@@ -30,8 +31,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 CameraPosition = new Vector3(0.8f, 2.5f, -4.2f);
 
 
-    void Start()
-    {
+    void Start() {
         controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
         pawnController = controlledPawn.GetComponent<CharacterController>();
 
@@ -43,17 +43,15 @@ public class PlayerController : MonoBehaviour
         pawnCamera.transform.localPosition = CameraPosition;
     }
 
-    void Update()
-    {
-        if (controlledPawn == null)
-            return;
+    void Update() {
+        if (controlledPawn == null) return;
 
         Movement();
         RayTrace();
+        MouseLock();
     }
 
-    private void Movement()
-    {
+    private void Movement() {
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
         moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
 
@@ -69,16 +67,14 @@ public class PlayerController : MonoBehaviour
         ApplyEffects();
     }
 
-    private void ChangeAlpha(float alpha)
-    {
+    private void ChangeAlpha(float alpha) {
         var mat = pawnController.GetComponent<Renderer>().material;
         var oldColor = mat.color;
         var newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
         mat.SetColor("_Color", newColor);
     }
 
-    private void RayTrace()
-    {
+    private void RayTrace() {
         var position = controlledPawn.transform.position;
         var forward = controlledPawn.transform.forward;
 
@@ -89,21 +85,18 @@ public class PlayerController : MonoBehaviour
         //if hit object is tagged as controllable, possess it 
         if (!Physics.Raycast(position, forward, out hitObj, 100, 1)) return;
 
-        if (hitObj.transform.gameObject.CompareTag("PlayerControllable"))
-        {
+        if (hitObj.transform.gameObject.CompareTag("PlayerControllable")) {
             ChangeControlledPawn(hitObj.transform.gameObject);
         }
     }
 
-    private void OnSneakBegin()
-    {
+    private void OnSneakBegin() {
         var sneak = new Sneak();
         _effects.Add("Sneak", sneak);
         ChangeAlpha(0.5f);
     }
 
-    private void OnSneakEnd()
-    {
+    private void OnSneakEnd() {
         _effects.Remove("Sneak");
         ChangeAlpha(1f);
     }
@@ -111,8 +104,7 @@ public class PlayerController : MonoBehaviour
     /**
      * Currently only works for speed
      */
-    private void ApplyEffects()
-    {
+    private void ApplyEffects() {
         var effects = _effects.Values;
         var newFlat = effects.Aggregate(baseSpeed, (accum, effect) => accum + effect.flat);
         speed = effects.Aggregate(newFlat, (accum, effect) => accum * effect.multiplier);
@@ -120,8 +112,7 @@ public class PlayerController : MonoBehaviour
 
 
     //sets controlled pawn to new pawn, resets camera on new pawn
-    private void ChangeControlledPawn(GameObject newPawn)
-    {
+    private void ChangeControlledPawn(GameObject newPawn) {
         var temp = controlledPawn;
         controlledPawn = newPawn;
         pawnController = controlledPawn.GetComponent<CharacterController>();
@@ -131,5 +122,19 @@ public class PlayerController : MonoBehaviour
 
         // retain current rotation
         pawnController.transform.rotation = temp.transform.rotation;
+    }
+
+    private void MouseLock() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            paused = !paused;
+        }
+        if (paused) {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            return;
+        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
     }
 }
