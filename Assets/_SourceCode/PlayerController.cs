@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour
 
     private void Movement()
     {
-        moveDirection = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
-        moveRotation = new Vector3(0.0f, Input.GetAxis("Horizontal"), 0.0f);
+        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+        moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
 
         //converts move direction to world space
         moveDirection = controlledPawn.transform.TransformVector(moveDirection);
