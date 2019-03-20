@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
         pawnController.Move(moveDirection * Time.deltaTime);
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             GameObject objectq;
             var sneak = new Sneak();
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _effects.Remove("Sneak");
             ChangeAlpha(1f);
