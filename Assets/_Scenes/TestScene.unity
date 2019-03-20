@@ -213,7 +213,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67274888}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1.25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -345,7 +345,7 @@ MonoBehaviour:
   pawnCamera: {fileID: 732681377}
   speed: 6
   turnSpeed: 5
-  jumpStrength: 5.5
+  jumpStrength: 5.2
 --- !u!4 &284733616
 Transform:
   m_ObjectHideFlags: 0
@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 1794319643}
   - component: {fileID: 1794319642}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: CollisionTestWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -909,7 +909,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8424c2a4b80a95e4094a5d80a3ed9366, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
