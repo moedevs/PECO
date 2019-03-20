@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityScript.Lang;
+using System.Linq;
+using UnityEngine.Experimental.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,10 +14,17 @@ public class PlayerController : MonoBehaviour
     private RaycastHit hitObj;
 
     //input variables 
-    public float speed = 12.0f;
+    private const float baseSpeed = 12.0f;
+    public float speed = baseSpeed;
     public float turnSpeed = 2f;
     Vector3 moveDirection;
     Vector3 moveRotation;
+
+    /**
+     * Speed modifiers for now, this will be
+     * generalized later on
+     */
+    private Dictionary<string, SpeedEffect> _effects = new Dictionary<string, SpeedEffect>();
 
     //sets the position of the camera behind each pawn once possessed
     private Vector3 CameraPosition = new Vector3(0.8f, 2.5f, -4.2f);
@@ -33,11 +45,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (controlledPawn != null)
-        {
-            Movement();
-            RayTrace();
-        }
+        if (controlledPawn == null)
+            return;
+
+        Movement();
+        RayTrace();
     }
 
     private void Movement()
@@ -51,6 +63,17 @@ public class PlayerController : MonoBehaviour
 
         pawnController.Move(moveDirection * Time.deltaTime);
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var sneak = new Sneak();
+            _effects.Add("Sneak", sneak);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            _effects.Remove("Sneak");
+        }
+        ApplyEffects();
     }
 
     private void RayTrace()
@@ -70,6 +93,17 @@ public class PlayerController : MonoBehaviour
             ChangeControlledPawn(hitObj.transform.gameObject);
         }
     }
+
+    /**
+     * Currently only works for speed
+     */
+    private void ApplyEffects()
+    {
+        var effects = _effects.Values;
+        var newFlat = effects.Aggregate(baseSpeed, (accum, effect) => accum + effect.flat);
+        speed = effects.Aggregate(newFlat, (accum, effect) => accum * effect.multiplier);
+    }
+
 
     //sets controlled pawn to new pawn, resets camera on new pawn
     private void ChangeControlledPawn(GameObject newPawn)
