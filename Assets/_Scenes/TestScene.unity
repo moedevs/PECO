@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43682566, g: 0.48446196, b: 0.5647195, a: 1}
+  m_IndirectSpecularColor: {r: 0.43682536, g: 0.48446125, b: 0.5647185, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -203,7 +203,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &67274894
 Rigidbody:
@@ -233,9 +233,9 @@ GameObject:
   - component: {fileID: 178403078}
   - component: {fileID: 178403077}
   - component: {fileID: 178403076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,6 +343,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawnCamera: {fileID: 732681377}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   speed: 6
   turnSpeed: 5
   jumpStrength: 5.2
@@ -358,7 +361,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &286446645
 GameObject:
@@ -560,7 +563,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322978651
 GameObject:
@@ -594,7 +597,7 @@ Transform:
   - {fileID: 286446649}
   - {fileID: 1869877407}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &547841039
 GameObject:
@@ -767,7 +770,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1530222878
 GameObject:
@@ -872,9 +875,9 @@ GameObject:
   - component: {fileID: 1794319644}
   - component: {fileID: 1794319643}
   - component: {fileID: 1794319642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CollisionTestWall
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -949,7 +952,7 @@ Transform:
   m_LocalScale: {x: 29.016, y: 2.077, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1869877403
 GameObject:
@@ -1161,7 +1164,7 @@ PrefabInstance:
     - target: {fileID: 7102785694608151694, guid: 4285c06ef07a69d4ca05e2d96c0a1060,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7102785694608151694, guid: 4285c06ef07a69d4ca05e2d96c0a1060,
         type: 3}

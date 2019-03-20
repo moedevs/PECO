@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum Form {Test,Human,Bear};
+    private Form currentForm = Form.Test;
+
     //playercontroller functionality 
     private GameObject controlledPawn;
     private Rigidbody pawnRigidbody;
     private CharacterController pawnController;
     public Camera pawnCamera;
     private RaycastHit hitObj;
+    public LayerMask mask;
 
     //input variables 
     private const float baseSpeed = 12.0f;
@@ -28,7 +32,6 @@ public class PlayerController : MonoBehaviour
     //sets the position of the camera behind each pawn once possessed
     private Vector3 CameraPosition = new Vector3(0.8f, 2.5f, -4.2f);
 
-
     void Start()
     {
         controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
@@ -41,14 +44,14 @@ public class PlayerController : MonoBehaviour
         pawnCamera.transform.rotation = Quaternion.Euler(15f, 0f, 0f);
         pawnCamera.transform.localPosition = CameraPosition;
 
-        if (controlledPawn.GetComponent<Rigidbody>())
-        {
+        if (controlledPawn.GetComponent<Rigidbody>()) {
             pawnRigidbody = controlledPawn.GetComponent<Rigidbody>();
         }
     }
 
     void FixedUpdate()
     {
+        //grounded = Physics.OverlapBox(transform.position, GetComponent<CapsuleCollider>().radius / 2, )
         if (controlledPawn == null)
             return;
         if (pawnRigidbody != null)
@@ -74,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
         pawnController.Move(moveDirection * Time.deltaTime);
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
+
+        IsGrounded();
 
         Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
         ApplyEffects();
@@ -103,7 +108,8 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         //check if the player is more than 0.1f above the ground, if so, they cannot jump
-        return Physics.Raycast(controlledPawn.transform.position, -controlledPawn.transform.up, controlledPawn.GetComponent<Collider>().bounds.extents.y + 0.1f);
+        //return Physics.Raycast(controlledPawn.transform.position, -controlledPawn.transform.up, controlledPawn.GetComponent<Collider>().bounds.extents.y + 0.1f);
+        return Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.95f), new Vector3(0.25f, 0.005f, 0.25f), Vector3.down, Quaternion.identity, 0.1f, mask);
     }
 
 

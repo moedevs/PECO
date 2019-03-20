@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
    
     public static GameManager gm;
 
-    private bool paused = false;
+    private bool paused, canPause;
 
     private void Awake() {
         if(gm == null) {
@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour {
         } else {
             Destroy(this.gameObject);
         }
+        paused = false;
+        canPause = true;
     }
 
     private void Update() {
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Test() {
-        if(Input.GetButtonDown("AttackScissor"))
+        if(Input.GetButtonDown("Pause"))
             Debug.Log("button down");
         else if(Input.GetAxisRaw("RemoveCostume") > 0.05)
             Debug.Log("axis down");
@@ -43,10 +45,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void MouseLock() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetButtonDown("Pause") && canPause) {
             paused = !paused;
         }
-        if (paused) {
+        if (!paused) {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             return;
