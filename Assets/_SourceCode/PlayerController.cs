@@ -65,15 +65,28 @@ public class PlayerController : MonoBehaviour
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            GameObject objectq;
             var sneak = new Sneak();
             _effects.Add("Sneak", sneak);
+            ChangeAlpha(0.5f);
         }
+
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
             _effects.Remove("Sneak");
+            ChangeAlpha(1f);
         }
+
         ApplyEffects();
+    }
+
+    private void ChangeAlpha(float alpha)
+    {
+        var mat = pawnController.GetComponent<Renderer>().material;
+        var oldColor = mat.color;
+        var newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
+        mat.SetColor("_Color", newColor);
     }
 
     private void RayTrace()
@@ -114,6 +127,8 @@ public class PlayerController : MonoBehaviour
         pawnCamera.transform.SetParent(controlledPawn.transform);
         pawnCamera.transform.localPosition = CameraPosition;
         pawnCamera.transform.rotation = controlledPawn.transform.rotation * Quaternion.Euler(15.0f, 0f, 0f);
+
+        // retain current rotation
         pawnController.transform.rotation = temp.transform.rotation;
     }
 }
