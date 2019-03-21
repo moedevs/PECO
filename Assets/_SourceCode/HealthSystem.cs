@@ -10,11 +10,6 @@ public class HealthSystem : MonoBehaviour
     void Start() {
         Health = MaxHealth;
     }
-
-    // Update is called once per frame
-    void Update() {
-        
-    }
     // spaghetti
     public static void TakeDamage(int amount = 1) {
         Health = Health - amount;
@@ -33,7 +28,7 @@ public class HealthSystem : MonoBehaviour
         }
         if (Health <= 0) {
             fuckingDead = true;
+            return;
         }
-        Debug.Log(Health);
     }
 }
