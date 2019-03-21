@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public enum Form {Test,Human,Bear};
+    public enum Form { Test, Human, Bear };
     private Form currentForm = Form.Test;
 
     //playercontroller functionality 
@@ -44,7 +44,8 @@ public class PlayerController : MonoBehaviour
         pawnCamera.transform.rotation = Quaternion.Euler(15f, 0f, 0f);
         pawnCamera.transform.localPosition = CameraPosition;
 
-        if (controlledPawn.GetComponent<Rigidbody>()) {
+        if (controlledPawn.GetComponent<Rigidbody>())
+        {
             pawnRigidbody = controlledPawn.GetComponent<Rigidbody>();
         }
     }
@@ -109,7 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         //check if the player is more than 0.1f above the ground, if so, they cannot jump
         //return Physics.Raycast(controlledPawn.transform.position, -controlledPawn.transform.up, controlledPawn.GetComponent<Collider>().bounds.extents.y + 0.1f);
-        return Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.95f), new Vector3(0.25f, 0.005f, 0.25f), Vector3.down, Quaternion.identity, 0.1f, mask);
+        return Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.95f), new Vector3(0.25f,0.005f,0.25f), Vector3.down, Quaternion.identity, 0.5f, mask);
     }
 
 

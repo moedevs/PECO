@@ -345,7 +345,7 @@ MonoBehaviour:
   pawnCamera: {fileID: 732681377}
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   speed: 6
   turnSpeed: 5
   jumpStrength: 5.2
