@@ -17,8 +17,9 @@ public class PauseHandler : MonoBehaviour
         if (Input.GetButtonDown("Pause") && canPause) {
             paused = !paused;
         }
-        PauseMenu.SetActive(paused);
+        Debug.Log(GameObject.Find("PauseMenu"));
         MouseLock();
+        PauseMenu.SetActive(true);
     }
 
     private void MouseLock() {
