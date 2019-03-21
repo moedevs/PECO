@@ -22,15 +22,13 @@ public class HealthSystem : MonoBehaviour
     }
     // af
     public static void updateHP() {
-        GameObject text = GameObject.Find("HPText");
-        text.GetComponent<UnityEngine.UI.Text>().text = "HP: " + Health;
         if (Health > MaxHealth) {
             Health = MaxHealth;
-            return;
         }
         if (Health <= 0) {
             fuckingDead = true;
-            return;
         }
+        GameObject text = GameObject.Find("HPText");
+        text.GetComponent<UnityEngine.UI.Text>().text = "HP: " + Health;
     }
 }
