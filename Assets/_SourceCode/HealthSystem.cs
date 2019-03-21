@@ -7,7 +7,7 @@ public class HealthSystem : MonoBehaviour
     static int MaxHealth = 6;
     public static int Health = 0;
     public static bool fuckingDead = false;
-    void Start() {
+    void Awake() {
         Health = MaxHealth;
     }
     // spaghetti
