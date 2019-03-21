@@ -13,15 +13,17 @@ public class HealthSystem : MonoBehaviour
     // spaghetti
     public static void TakeDamage(int amount = 1) {
         Health = Health - amount;
-        checkHP();
+        updateHP();
     }
     // code
     public static void HealDamage(int amount = 1) {
         Health = Health + amount;
-        checkHP();
+        updateHP();
     }
     // af
-    public static void checkHP() {
+    public static void updateHP() {
+        GameObject text = GameObject.Find("HPText");
+        text.GetComponent<UnityEngine.UI.Text>().text = "HP: " + Health;
         if (Health > MaxHealth) {
             Health = MaxHealth;
             return;
