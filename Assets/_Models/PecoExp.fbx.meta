@@ -1,0 +1,185 @@
+fileFormatVersion: 2
+guid: c28bf858c63e29142a9999d16dda76cc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: bez_bevalA
+    100002: bez_bevalA.001
+    100004: bez_hairlock.000
+    100006: bez_hairlock.001
+    100008: bez_hairlock.003
+    100010: bez_hairlock.004
+    100012: bez_hairlock.005
+    100014: bez_hairlock.006
+    100016: bez_taperA
+    100018: bez_taperA.001
+    100020: bow
+    100022: BrowL
+    100024: BrowR
+    100026: Eyes
+    100028: Main_Body
+    100030: Peco_Head
+    100032: //RootNode
+    100034: Zipper
+    400000: bez_bevalA
+    400002: bez_bevalA.001
+    400004: bez_hairlock.000
+    400006: bez_hairlock.001
+    400008: bez_hairlock.003
+    400010: bez_hairlock.004
+    400012: bez_hairlock.005
+    400014: bez_hairlock.006
+    400016: bez_taperA
+    400018: bez_taperA.001
+    400020: bow
+    400022: BrowL
+    400024: BrowR
+    400026: Eyes
+    400028: Main_Body
+    400030: Peco_Head
+    400032: //RootNode
+    400034: Zipper
+    2100000: Bear
+    2100002: face
+    2100004: zipper
+    2100006: bow
+    2100008: Eye
+    2100010: Hair
+    2300000: bez_bevalA
+    2300002: bez_bevalA.001
+    2300004: bez_hairlock.000
+    2300006: bez_hairlock.001
+    2300008: bez_hairlock.003
+    2300010: bez_hairlock.004
+    2300012: bez_hairlock.005
+    2300014: bez_hairlock.006
+    2300016: bez_taperA
+    2300018: bez_taperA.001
+    2300020: bow
+    2300022: BrowL
+    2300024: BrowR
+    2300026: Eyes
+    2300028: Main_Body
+    2300030: Peco_Head
+    2300032: Zipper
+    3300000: bez_bevalA
+    3300002: bez_bevalA.001
+    3300004: bez_hairlock.000
+    3300006: bez_hairlock.001
+    3300008: bez_hairlock.003
+    3300010: bez_hairlock.004
+    3300012: bez_hairlock.005
+    3300014: bez_hairlock.006
+    3300016: bez_taperA
+    3300018: bez_taperA.001
+    3300020: bow
+    3300022: BrowL
+    3300024: BrowR
+    3300026: Eyes
+    3300028: Main_Body
+    3300030: Peco_Head
+    3300032: Zipper
+    4300000: Main_Body
+    4300002: Peco_Head
+    4300004: Zipper
+    4300006: bow
+    4300008: Eyes
+    4300010: bez_taperA
+    4300012: bez_bevalA
+    4300014: bez_hairlock.001
+    4300016: bez_hairlock.003
+    4300018: bez_hairlock.004
+    4300020: bez_hairlock.005
+    4300022: bez_hairlock.006
+    4300024: bez_bevalA.001
+    4300026: bez_taperA.001
+    4300028: BrowL
+    4300030: BrowR
+    4300032: bez_hairlock.000
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
