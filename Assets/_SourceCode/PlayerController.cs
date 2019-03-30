@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public Camera pawnCamera;
     private RaycastHit hitObj;
     public LayerMask mask;
-    private bool jump = false;
+    private bool jumpFlag = false;
 
     //input variables 
     private const float baseSpeed = 12.0f;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update() {
         if(Input.GetButtonDown("Jump") && IsGrounded()) {
-            jump = true;
+            jumpFlag = true;
         }
     }
 
@@ -80,9 +80,9 @@ public class PlayerController : MonoBehaviour
         moveDirection = controlledPawn.transform.TransformVector(moveDirection);
         
         // Apply gravity and jump
-        if(jump) {
-            moveDirection.y = 10f;
-            jump = false;
+        if(jumpFlag) {
+            moveDirection.y = jumpStrength;
+            jumpFlag = false;
         } else if(!IsGrounded()) {
             moveDirection.y += -1f;
         } else {
@@ -134,11 +134,12 @@ public class PlayerController : MonoBehaviour
         ApplyEffects();
     }
 
+    /// <summary>
+    /// Checks if the player is grounded or not. Returns false if the player is attemting to jump.
+    /// </summary>
     private bool IsGrounded() {
-        //check if the player is more than 0.1f above the ground, if so, they cannot jump
-        //return Physics.Raycast(controlledPawn.transform.position, -controlledPawn.transform.up, controlledPawn.GetComponent<Collider>().bounds.extents.y + 0.1f);
         //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, 0.8f), Vector3.down, Color.black);
-        return jump ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.8f), new Vector3(0.25f, 0.02f, 0.25f), Vector3.down, Quaternion.identity, 0.01f, mask);
+        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.8f), new Vector3(0.25f, 0.02f, 0.25f), Vector3.down, Quaternion.identity, 0.01f, mask);
     }
 
     private void ChangeAlpha(float alpha)

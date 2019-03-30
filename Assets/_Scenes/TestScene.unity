@@ -350,7 +350,7 @@ MonoBehaviour:
     m_Bits: 512
   speed: 6
   turnSpeed: 5
-  jumpStrength: 5.2
+  jumpStrength: 10
 --- !u!4 &284733616
 Transform:
   m_ObjectHideFlags: 0
@@ -1852,7 +1852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 726576753, guid: ca4bfefbbbc49984db7fdfcd3f649d00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 726576753, guid: ca4bfefbbbc49984db7fdfcd3f649d00, type: 3}
       propertyPath: m_LocalPosition.z
