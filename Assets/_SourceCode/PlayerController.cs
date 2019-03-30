@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public Camera pawnCamera;
     private RaycastHit hitObj;
     public LayerMask mask;
+    private bool jump = false;
 
     //input variables 
     private const float baseSpeed = 12.0f;
@@ -50,24 +51,51 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Update() {
+        if(Input.GetButtonDown("Jump") && IsGrounded()) {
+            jump = true;
+        }
+    }
+
     void FixedUpdate()
     {
         //grounded = Physics.OverlapBox(transform.position, GetComponent<CapsuleCollider>().radius / 2, )
         if (controlledPawn == null)
             return;
-        if (pawnRigidbody != null)
-        {
+        if (pawnRigidbody != null) {
             RBMovement();
-        }
-        else
-        {
+        } else {
             Movement();
         }
 
         RayTrace();
     }
 
-    private void Movement()
+    private void Movement() {
+        // Retrieve inputs
+        //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        moveDirection.x = Input.GetAxis("Horizontal") * speed;
+        moveDirection.z = Input.GetAxis("Vertical") * speed;
+        moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
+        moveDirection = controlledPawn.transform.TransformVector(moveDirection);
+        
+        // Apply gravity and jump
+        if(jump) {
+            moveDirection.y = 10f;
+            jump = false;
+        } else if(!IsGrounded()) {
+            moveDirection.y += -1f;
+        } else {
+            moveDirection.y = 0;
+        }
+        moveDirection.y = Mathf.Clamp(moveDirection.y, -20f, 10f);
+
+        // Apply movement
+        pawnController.Move(moveDirection * Time.fixedDeltaTime);
+        pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
+    }
+
+    private void MovementOld()
     {
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
@@ -106,13 +134,12 @@ public class PlayerController : MonoBehaviour
         ApplyEffects();
     }
 
-    private bool IsGrounded()
-    {
+    private bool IsGrounded() {
         //check if the player is more than 0.1f above the ground, if so, they cannot jump
         //return Physics.Raycast(controlledPawn.transform.position, -controlledPawn.transform.up, controlledPawn.GetComponent<Collider>().bounds.extents.y + 0.1f);
-        return Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.95f), new Vector3(0.25f,0.005f,0.25f), Vector3.down, Quaternion.identity, 0.5f, mask);
+        //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, 0.8f), Vector3.down, Color.black);
+        return jump ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.8f), new Vector3(0.25f, 0.02f, 0.25f), Vector3.down, Quaternion.identity, 0.01f, mask);
     }
-
 
     private void ChangeAlpha(float alpha)
     {
