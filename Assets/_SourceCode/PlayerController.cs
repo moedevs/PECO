@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     public enum Form { Test, Human, Bear };
     private Form currentForm = Form.Test;
 
-    //playercontroller functionality 
+    public static PlayerController pc;
+
+    // PlayerController/movement functionality 
     private GameObject controlledPawn;
     private Rigidbody pawnRigidbody;
     private CharacterController pawnController;
@@ -16,13 +18,16 @@ public class PlayerController : MonoBehaviour
     public LayerMask mask;
     private bool jumpFlag = false;
 
-    //input variables 
+    // Input variables 
     private const float baseSpeed = 12.0f;
     public float speed = baseSpeed;
     public float turnSpeed = 2f;
     public float jumpStrength = 5.2f;
     Vector3 moveDirection;
     Vector3 moveRotation;
+
+    // Animation variables
+    private Animator anim;
 
     /**
      * Speed modifiers for now, this will be
@@ -33,47 +38,50 @@ public class PlayerController : MonoBehaviour
     //sets the position of the camera behind each pawn once possessed
     private Vector3 CameraPosition = new Vector3(0.8f, 2.5f, -4.2f);
 
-    void Start()
-    {
+    private void Awake() {
+        if(pc == null) {
+            pc = this;
+            DontDestroyOnLoad(gameObject);
+        } else
+            Destroy(gameObject);
+    }
+
+    private void Start() {
         controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
         pawnController = controlledPawn.GetComponent<CharacterController>();
 
-        //Sets the camera to be a child of  the controlled pawn
+        // Sets the camera to be a child of  the controlled pawn
         pawnCamera.transform.SetParent(controlledPawn.transform);
 
-        //force set the cameras position 
+        // Force set the cameras position 
         pawnCamera.transform.rotation = Quaternion.Euler(15f, 0f, 0f);
         pawnCamera.transform.localPosition = CameraPosition;
 
-        if (controlledPawn.GetComponent<Rigidbody>())
-        {
+        // Find additional components
+        if (controlledPawn.GetComponent<Rigidbody>()) {
             pawnRigidbody = controlledPawn.GetComponent<Rigidbody>();
         }
+        anim = controlledPawn.GetComponent<Animator>();
     }
 
     private void Update() {
-        if(Input.GetButtonDown("Jump") && IsGrounded()) {
+        if(Input.GetButtonDown("Jump") && IsGrounded())
             jumpFlag = true;
-        }
+        if(Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard"))
+            anim.SetTrigger("Attack");
     }
 
-    void FixedUpdate()
-    {
-        //grounded = Physics.OverlapBox(transform.position, GetComponent<CapsuleCollider>().radius / 2, )
+    private void FixedUpdate() {
         if (controlledPawn == null)
             return;
-        if (pawnRigidbody != null) {
-            RBMovement();
-        } else {
-            Movement();
-        }
+        // Apply movement
+        Movement();
 
-        RayTrace();
+        //RayTrace();
     }
 
     private void Movement() {
         // Retrieve inputs
-        //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         moveDirection.x = Input.GetAxis("Horizontal") * speed;
         moveDirection.z = Input.GetAxis("Vertical") * speed;
         moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
@@ -95,25 +103,7 @@ public class PlayerController : MonoBehaviour
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
     }
 
-    private void MovementOld()
-    {
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
-
-        //converts move direction to world space
-        moveDirection = controlledPawn.transform.TransformVector(moveDirection);
-        moveDirection = moveDirection * speed;
-
-        pawnController.Move(moveDirection * Time.deltaTime);
-        pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
-
-        IsGrounded();
-
-        Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
-        ApplyEffects();
-    }
-
-    private void RBMovement()
+    /*private void RBMovement()
     {
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
@@ -132,7 +122,7 @@ public class PlayerController : MonoBehaviour
 
         Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
         ApplyEffects();
-    }
+    }*/
 
     /// <summary>
     /// Checks if the player is grounded or not. Returns false if the player is attemting to jump.
@@ -192,7 +182,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //sets controlled pawn to new pawn, resets camera on new pawn
-    private void ChangeControlledPawn(GameObject newPawn)
+    public void ChangeControlledPawn(GameObject newPawn)
     {
         var temp = controlledPawn;
         controlledPawn = newPawn;
@@ -213,7 +203,7 @@ public class PlayerController : MonoBehaviour
         // retain current rotation
         controlledPawn.transform.rotation = temp.transform.rotation;
 
-
+        // grab additional components
+        anim = controlledPawn.GetComponent<Animator>();
     }
-
 }

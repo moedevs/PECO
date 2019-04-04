@@ -131,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &67274890
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -348,7 +348,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 512
-  speed: 6
+  speed: 8
   turnSpeed: 5
   jumpStrength: 10
 --- !u!4 &284733616
@@ -629,7 +629,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408610007}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -705,6 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb44da3021a84744e94a4f68acdc055a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amount: 1
 --- !u!1 &454608087
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,25 +897,6 @@ Transform:
   m_Father: {fileID: 322978652}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &714765044 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4174185399847800334, guid: 4285c06ef07a69d4ca05e2d96c0a1060,
-    type: 3}
-  m_PrefabInstance: {fileID: 4668923407959189015}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &714765047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 714765044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127777c21abb40840a9f2a859312bde5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PauseMenu: {fileID: 1140291905}
 --- !u!1 &732681375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,7 +1254,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765411391}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1348,6 +1330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8367c3db35a73de42adf4f01d2c3e051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amount: 1
 --- !u!1 &1794319641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,5 +1942,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 714765047, guid: 4285c06ef07a69d4ca05e2d96c0a1060, type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 1140291905}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285c06ef07a69d4ca05e2d96c0a1060, type: 3}
