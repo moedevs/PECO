@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
 
     // PlayerController/movement functionality 
     private GameObject controlledPawn;
-    private Rigidbody pawnRigidbody;
     private CharacterController pawnController;
     public Camera pawnCamera;
     private RaycastHit hitObj;
@@ -58,9 +57,6 @@ public class PlayerController : MonoBehaviour
         pawnCamera.transform.localPosition = CameraPosition;
 
         // Find additional components
-        if (controlledPawn.GetComponent<Rigidbody>()) {
-            pawnRigidbody = controlledPawn.GetComponent<Rigidbody>();
-        }
         anim = controlledPawn.GetComponent<Animator>();
     }
 
@@ -181,21 +177,13 @@ public class PlayerController : MonoBehaviour
         speed = effects.Aggregate(newFlat, (accum, effect) => accum * effect.multiplier);
     }
 
-    //sets controlled pawn to new pawn, resets camera on new pawn
-    public void ChangeControlledPawn(GameObject newPawn)
-    {
+    // Sets controlled pawn to new pawn, resets camera on new pawn
+    public void ChangeControlledPawn(GameObject newPawn) {
         var temp = controlledPawn;
         controlledPawn = newPawn;
+        pawnController = controlledPawn.GetComponent<CharacterController>();
 
-        if (newPawn.GetComponent<Rigidbody>())
-        {
-            pawnRigidbody = newPawn.GetComponent<Rigidbody>();
-        }
-        else
-        {
-            pawnRigidbody = null;
-            pawnController = controlledPawn.GetComponent<CharacterController>();
-        }
+        // set camera transform
         pawnCamera.transform.SetParent(controlledPawn.transform);
         pawnCamera.transform.localPosition = CameraPosition;
         pawnCamera.transform.rotation = controlledPawn.transform.rotation * Quaternion.Euler(15.0f, 0f, 0f);
