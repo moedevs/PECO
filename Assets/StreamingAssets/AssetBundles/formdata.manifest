@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 2660855467
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 63f9e67f5296a7baf94a40f50166a8a2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: de7abff85f7b03719ea2158f1c190b3d
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 305ec95c33a71b442b7ad36cf729c1b1, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/_SourceCode/Form Data/TestCapsuleData.asset
+Dependencies: []

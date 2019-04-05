@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private RaycastHit hitObj;
     public LayerMask mask;
     private bool jumpFlag = false;
+    /*[HideInInspector] */public FormDataBase formData;
 
     // Input variables 
     private const float baseSpeed = 12.0f;
@@ -69,7 +70,7 @@ public class PlayerController : MonoBehaviour
     private void Update() {
         if(controlledPawn == null)
             return;
-        if(Input.GetButtonDown("Jump") && IsGrounded())
+        if(!jumpFlag && Input.GetButtonDown("Jump") && IsGrounded())
             jumpFlag = true;
         if(Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard"))
             anim.SetTrigger("Attack");
@@ -85,8 +86,8 @@ public class PlayerController : MonoBehaviour
 
     private void Movement() {
         // Retrieve inputs
-        moveDirection.x = Input.GetAxis("Horizontal") * speed;
-        moveDirection.z = Input.GetAxis("Vertical") * speed;
+        moveDirection.x = Input.GetAxis("Horizontal") * formData.walkSpeed;
+        moveDirection.z = Input.GetAxis("Vertical") * formData.walkSpeed;
         moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
         moveDirection = controlledPawn.transform.TransformVector(moveDirection);
         

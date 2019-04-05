@@ -1,0 +1,53 @@
+ManifestFileVersion: 0
+CRC: 529878118
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2730febceb3bc8b5da8bad4c57c2fee9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a127fc45d18a16380f09835e62fa179b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4ae38234b2a12c94ea13848d22f53e47, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 143
+  Script: {instanceID: 0}
+Assets:
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/face.mat
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/bow.mat
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/face(norm).png
+- Assets/_Art/_Models/PecoBear/PecoBearModel.fbx
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Bear.mat
+- Assets/_Prefabs/PecoBear.prefab
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Eye.mat
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Hair.mat
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/zipper.mat
+- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Materials/face(norm).mat
+Dependencies: []
