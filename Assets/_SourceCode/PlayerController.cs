@@ -5,24 +5,23 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public enum Form { Test, Human, Bear };
-    private Form currentForm = Form.Test;
+    [HideInInspector] public Form currentForm;
 
     public static PlayerController pc;
 
     // PlayerController/movement functionality 
-    public GameObject controlledPawn;
+    [SerializeField] private GameObject controlledPawn;
     private CharacterController pawnController;
     public Camera pawnCamera;
     private RaycastHit hitObj;
     public LayerMask mask;
     private bool jumpFlag = false;
-    /*[HideInInspector] */public FormDataBase formData;
+    public FormDataBase formData;
 
     // Input variables 
     private const float baseSpeed = 12.0f;
     public float speed = baseSpeed;
     public float turnSpeed = 2f;
-    public float jumpStrength = 5.2f;
     Vector3 moveDirection;
     Vector3 moveRotation;
 
@@ -44,6 +43,7 @@ public class PlayerController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         } else
             Destroy(gameObject);
+        currentForm = Form.Bear;
     }
 
     private void Start() {
@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour
             try {
                 controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
             } catch {
-                Debug.LogError("Unable to find object with tag \"PlayarControllable\".");
+                Debug.LogError("Unable to find object with tag \"PlayarControllable\", unable to set controlled Player.");
+                return;
             }
         }
         pawnController = controlledPawn.GetComponent<CharacterController>();
@@ -93,14 +94,14 @@ public class PlayerController : MonoBehaviour
         
         // Apply gravity and jump
         if(jumpFlag) {
-            moveDirection.y = jumpStrength;
+            moveDirection.y = formData.jumpStrength;
             jumpFlag = false;
         } else if(!IsGrounded()) {
-            moveDirection.y += -1f;
+            moveDirection.y -= formData.gravityBase;
         } else {
             moveDirection.y = 0;
         }
-        moveDirection.y = Mathf.Clamp(moveDirection.y, -20f, 10f);
+        moveDirection.y = Mathf.Clamp(moveDirection.y, Mathf.Abs(formData.maxFallSpeed) * -1f, 50f);
 
         // Apply movement
         pawnController.Move(moveDirection * Time.fixedDeltaTime);
@@ -132,8 +133,8 @@ public class PlayerController : MonoBehaviour
     /// Checks if the player is grounded or not. Returns false if the player is attemting to jump.
     /// </summary>
     private bool IsGrounded() {
-        //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, 0.8f), Vector3.down, Color.black);
-        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.8f), new Vector3(0.25f, 0.02f, 0.25f), Vector3.down, Quaternion.identity, 0.01f, mask);
+        //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), Vector3.down, Color.black, 1f, false);
+        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, Quaternion.identity, 0.01f, mask);
     }
 
     private void ChangeAlpha(float alpha)
@@ -201,5 +202,15 @@ public class PlayerController : MonoBehaviour
 
         // grab additional components
         anim = controlledPawn.GetComponent<Animator>();
+
+        // grab new form data
+        // TODO - detect what form player is changing too
+        if(currentForm == Form.Bear) {
+            GetComponent<FormManager>().GetNewData(Form.Test);
+            currentForm = Form.Test;
+        } else {
+            GetComponent<FormManager>().GetNewData(Form.Bear);
+            currentForm = Form.Bear;
+        }
     }
 }

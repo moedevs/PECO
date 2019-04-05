@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: BearData
   m_EditorClassIdentifier: 
   walkSpeed: 6
-  gravityBase: 5
-  gravityShortHop: 3
-  gravityFalling: 8
+  jumpStrength: 10
+  gravityBase: 1
+  gravityShortHop: 0.5
+  gravityFalling: 1.5
+  maxFallSpeed: -20
+  formHeight: 1.55
   groundedSkin: {x: 0.25, y: 0.02, z: 0.25}

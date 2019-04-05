@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2660855467
+CRC: 749108072
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 63f9e67f5296a7baf94a40f50166a8a2
+    Hash: 945583e9bcd03ed7176c4f3c14bb12ad
   TypeTreeHash:
     serializedVersion: 2
-    Hash: de7abff85f7b03719ea2158f1c190b3d
+    Hash: 2d2e25fde38e8d77064c3762a3210083
 HashAppended: 0
 ClassTypes:
 - Class: 114
@@ -14,5 +14,6 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
+- Assets/_SourceCode/Form Data/BearData.asset
 - Assets/_SourceCode/Form Data/TestCapsuleData.asset
 Dependencies: []

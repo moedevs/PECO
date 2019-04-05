@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2537fe87976f1b247a1ab4d859ddc6f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentForm: 2
   controlledPawn: {fileID: 231086523}
   pawnCamera: {fileID: 732681377}
   mask:
@@ -359,7 +360,6 @@ MonoBehaviour:
   formData: {fileID: 0}
   speed: 8
   turnSpeed: 5
-  jumpStrength: 10
 --- !u!4 &284733616
 Transform:
   m_ObjectHideFlags: 0
@@ -1745,7 +1745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 726576753, guid: ca4bfefbbbc49984db7fdfcd3f649d00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 726576753, guid: ca4bfefbbbc49984db7fdfcd3f649d00, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1805,12 +1805,12 @@ PrefabInstance:
     - target: {fileID: 839368244058687717, guid: 0043a034ea317324c9c49f7854db5b0e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.951
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 839368244058687717, guid: 0043a034ea317324c9c49f7854db5b0e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 839368244058687717, guid: 0043a034ea317324c9c49f7854db5b0e,
         type: 3}
