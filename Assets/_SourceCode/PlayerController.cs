@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController pc;
 
     // PlayerController/movement functionality 
-    private GameObject controlledPawn;
+    public GameObject controlledPawn;
     private CharacterController pawnController;
     public Camera pawnCamera;
     private RaycastHit hitObj;
@@ -46,7 +46,13 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start() {
-        controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
+        if(controlledPawn == null) {
+            try {
+                controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
+            } catch {
+                Debug.LogError("Unable to find object with tag \"PlayarControllable\".");
+            }
+        }
         pawnController = controlledPawn.GetComponent<CharacterController>();
 
         // Sets the camera to be a child of  the controlled pawn
@@ -61,6 +67,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
+        if(controlledPawn == null)
+            return;
         if(Input.GetButtonDown("Jump") && IsGrounded())
             jumpFlag = true;
         if(Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard"))
@@ -72,7 +80,6 @@ public class PlayerController : MonoBehaviour
             return;
         // Apply movement
         Movement();
-
         //RayTrace();
     }
 
