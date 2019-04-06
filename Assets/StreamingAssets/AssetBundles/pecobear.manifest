@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3686159117
+CRC: 1490682583
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5cd77cdd72e2888bfa59449306ce7922
+    Hash: 38fc909ccb62dc0ac8c9368d2595df16
   TypeTreeHash:
     serializedVersion: 2
     Hash: a127fc45d18a16380f09835e62fa179b
@@ -40,14 +40,5 @@ ClassTypes:
 - Class: 143
   Script: {instanceID: 0}
 Assets:
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/face.mat
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/bow.mat
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/face(norm).png
-- Assets/_Art/_Models/PecoBear/PecoBearModel.fbx
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Bear.mat
 - Assets/_Prefabs/PecoBear.prefab
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Eye.mat
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Hair.mat
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/zipper.mat
-- Assets/_Art/_Models/PecoBear/Materials_Peco_Bear/Materials/face(norm).mat
 Dependencies: []

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 305ec95c33a71b442b7ad36cf729c1b1, type: 3}
-  m_Name: BearData
+  m_Name: HumanData
   m_EditorClassIdentifier: 
   walkSpeed: 6
-  jumpStrength: 12.5
+  jumpStrength: 15
   gravityBase: 0.5
   gravityShortHop: 0.75
   gravityFalling: 1
   maxFallSpeed: -50
-  formHeight: 1.55
-  spawnHeight: 0.805
+  formHeight: 2
+  spawnHeight: 1.03
   groundedSkin: {x: 0.25, y: 0.02, z: 0.25}

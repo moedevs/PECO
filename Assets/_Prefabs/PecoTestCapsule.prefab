@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 839368244058687719}
   - component: {fileID: 839368244058687713}
   - component: {fileID: 839368244058687718}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PecoTestCapsule
   m_TagString: PlayerControllable
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839368244058687712}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.951, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 839368244111432865}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 839368244111432868}
   - component: {fileID: 839368244111432871}
   - component: {fileID: 839368244111432870}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Scissors
   m_TagString: ScissorAttack
   m_Icon: {fileID: 0}

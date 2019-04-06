@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 35644073}
   - component: {fileID: 35644075}
   - component: {fileID: 35644074}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 101887447}
   - component: {fileID: 101887449}
   - component: {fileID: 101887448}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 180703357}
   - component: {fileID: 180703359}
   - component: {fileID: 180703358}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 285775865}
   - component: {fileID: 285775867}
   - component: {fileID: 285775866}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 303199985}
   - component: {fileID: 303199987}
   - component: {fileID: 303199986}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 405159334}
   - component: {fileID: 405159336}
   - component: {fileID: 405159335}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_bevalA.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 601256398}
   - component: {fileID: 601256400}
   - component: {fileID: 601256399}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Peco_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 698398357}
   - component: {fileID: 698398359}
   - component: {fileID: 698398358}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BrowL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 726576753}
   - component: {fileID: 726576752}
   - component: {fileID: 5296755408752467472}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PecoBear
   m_TagString: PlayerControllable
   m_Icon: {fileID: 0}
@@ -642,7 +642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726576751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.35, y: 1, z: 1.76}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 931209079}
@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 821355591}
   - component: {fileID: 821355593}
   - component: {fileID: 821355592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +791,7 @@ GameObject:
   - component: {fileID: 931209079}
   - component: {fileID: 931209081}
   - component: {fileID: 931209080}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_bevalA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 993975105}
   - component: {fileID: 993975107}
   - component: {fileID: 993975106}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_taperA.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 1262457722}
   - component: {fileID: 1262457724}
   - component: {fileID: 1262457723}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Zipper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1022,7 +1022,7 @@ GameObject:
   - component: {fileID: 1401959371}
   - component: {fileID: 1401959373}
   - component: {fileID: 1401959372}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 1478278274}
   - component: {fileID: 1478278276}
   - component: {fileID: 1478278275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 1921427853}
   - component: {fileID: 1921427855}
   - component: {fileID: 1921427854}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1253,7 +1253,7 @@ GameObject:
   - component: {fileID: 2071401100}
   - component: {fileID: 2071401102}
   - component: {fileID: 2071401101}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BrowR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1330,7 +1330,7 @@ GameObject:
   - component: {fileID: 2111813686}
   - component: {fileID: 2111813688}
   - component: {fileID: 2111813687}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_taperA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 4118612831396303637}
   - component: {fileID: 5890548308639999195}
   - component: {fileID: 2421700312496117537}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Scissors
   m_TagString: ScissorAttack
   m_Icon: {fileID: 0}

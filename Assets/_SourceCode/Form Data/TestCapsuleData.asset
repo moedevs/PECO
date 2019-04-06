@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: TestCapsuleData
   m_EditorClassIdentifier: 
   walkSpeed: 6
-  jumpStrength: 10
-  gravityBase: 1
-  gravityShortHop: 0.5
-  gravityFalling: 1.5
-  maxFallSpeed: -20
+  jumpStrength: 15
+  gravityBase: 0.5
+  gravityShortHop: 0.75
+  gravityFalling: 1
+  maxFallSpeed: -50
   formHeight: 2
+  spawnHeight: 1.03
   groundedSkin: {x: 0.25, y: 0.02, z: 0.25}
