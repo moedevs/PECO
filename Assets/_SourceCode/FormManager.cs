@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FormManager : MonoBehaviour {
     
     [HideInInspector] public GameObject humanPawn, testPawn, bearPawn;
 
+    public float removeTime;
+    public RectTransform removeBar;
+
     private PlayerController player;
     private AssetBundle formBundle, pecoHumanBundle, pecoTestBundle, pecoBearBundle;
+    private float holdTime;
 
     private void Awake() {
         player = GetComponent<PlayerController>();
@@ -38,6 +43,27 @@ public class FormManager : MonoBehaviour {
             player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");
     }
 
+    private void Update() {
+        if(removeTime <= 0.1f)
+            removeTime = 0.11f;
+        if(player.currentForm != PlayerController.Form.Human && player.currentForm != PlayerController.Form.Test) {
+            if(Input.GetButton("RemoveCostume")) {
+                holdTime += Time.deltaTime;
+                if(holdTime >= removeTime) {
+                    player.ChangeControlledPawn(PlayerController.Form.Human);
+                    removeBar.sizeDelta = new Vector2(0f, 30f);
+                } else if(holdTime > 0.1f)
+                    removeBar.sizeDelta = new Vector2(((holdTime - 0.1f) / (removeTime - 0.1f)) * 400f, 30f);
+            } else if(Input.GetButtonUp("RemoveCostume")) {
+                holdTime = 0;
+                removeBar.sizeDelta = new Vector2(0f, 30f);
+            }
+        } else {
+            holdTime = 0;
+            removeBar.sizeDelta = new Vector2(0f, 30f);
+        }
+    }
+
     public GameObject GetNewPawn(PlayerController.Form newForm) {
         switch(newForm) {
             case PlayerController.Form.Human:
@@ -59,7 +85,8 @@ public class FormManager : MonoBehaviour {
     public void GetNewData(PlayerController.Form newForm) {
         switch(newForm) {
             case PlayerController.Form.Human:
-                Debug.Log("Human form data not yet set up.");
+                player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");
+                player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");
                 return;
             case PlayerController.Form.Bear:
                 player.formData = formBundle.LoadAsset<FormDataBase>("BearData");

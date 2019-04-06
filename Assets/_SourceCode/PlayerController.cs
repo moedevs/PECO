@@ -196,6 +196,7 @@ public class PlayerController : MonoBehaviour
 
         // grab new form data
         formManager.GetNewData(currentForm);
+        Debug.Log(formData.formHeight);
 
         // retain current position and rotation
         pawnController.enabled = false;
