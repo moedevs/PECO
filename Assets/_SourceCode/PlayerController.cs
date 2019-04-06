@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,23 +6,31 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public enum Form { Test, Human, Bear };
-    private Form currentForm = Form.Test;
 
-    //playercontroller functionality 
-    private GameObject controlledPawn;
-    private Rigidbody pawnRigidbody;
+    public static PlayerController pc;
+
+    // PlayerController/movement functionality
+    [SerializeField] private GameObject controlledPawn;
     private CharacterController pawnController;
     public Camera pawnCamera;
     private RaycastHit hitObj;
     public LayerMask mask;
+    private bool jumpFlag = false;
 
-    //input variables 
+    // Costume/form functionality
+    [HideInInspector] public Form currentForm;
+    public FormDataBase formData;
+    private FormManager formManager;
+
+    // Input variables 
     private const float baseSpeed = 12.0f;
     public float speed = baseSpeed;
     public float turnSpeed = 2f;
-    public float jumpStrength = 5.2f;
     Vector3 moveDirection;
     Vector3 moveRotation;
+
+    // Animation variables
+    private Animator anim;
 
     /**
      * Speed modifiers for now, this will be
@@ -32,87 +41,98 @@ public class PlayerController : MonoBehaviour
     //sets the position of the camera behind each pawn once possessed
     private Vector3 CameraPosition = new Vector3(0.8f, 2.5f, -4.2f);
 
-    void Start()
-    {
-        controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
+    private void Awake() {
+        if(pc == null) {
+            pc = this;
+            DontDestroyOnLoad(gameObject);
+        } else
+            Destroy(gameObject);
+        currentForm = Form.Test;
+
+        // set controlledPawn
+        if(controlledPawn == null) {
+            try {
+                controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
+            } catch {
+                Debug.LogError("Unable to find object with tag \"PlayarControllable\", unable to set controlled Player.");
+                return;
+            }
+        }
         pawnController = controlledPawn.GetComponent<CharacterController>();
 
-        //Sets the camera to be a child of  the controlled pawn
+        // Sets the camera to be a child of the controlled pawn
         pawnCamera.transform.SetParent(controlledPawn.transform);
 
-        //force set the cameras position 
+        // Force set the cameras position 
         pawnCamera.transform.rotation = Quaternion.Euler(15f, 0f, 0f);
         pawnCamera.transform.localPosition = CameraPosition;
 
-        if (controlledPawn.GetComponent<Rigidbody>())
-        {
-            pawnRigidbody = controlledPawn.GetComponent<Rigidbody>();
-        }
+        // Find additional components
+        anim = controlledPawn.GetComponent<Animator>();
+        formManager = GetComponent<FormManager>();
+        formManager.humanPawn = controlledPawn;
     }
 
-    void FixedUpdate()
-    {
-        //grounded = Physics.OverlapBox(transform.position, GetComponent<CapsuleCollider>().radius / 2, )
+    private void Update() {
+        if(controlledPawn == null)
+            return;
+        if(!jumpFlag && Input.GetButtonDown("Jump") && IsGrounded())
+            jumpFlag = true;
+        if(Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard"))
+            anim.SetTrigger("Attack");
+    }
+
+    private void FixedUpdate() {
         if (controlledPawn == null)
             return;
-        if (pawnRigidbody != null)
-        {
-            RBMovement();
-        }
-        else
-        {
-            Movement();
-        }
-
-        RayTrace();
+        // Apply movement
+        Movement();
+        //RayTrace();
     }
 
-    private void Movement()
-    {
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+    private void Movement() {
+        // Retrieve inputs
+        moveDirection.x = Input.GetAxis("Horizontal") * formData.walkSpeed;
+        moveDirection.z = Input.GetAxis("Vertical") * formData.walkSpeed;
         moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
-
-        //converts move direction to world space
         moveDirection = controlledPawn.transform.TransformVector(moveDirection);
-        moveDirection = moveDirection * speed;
+        
+        // Apply gravity and jump
+        if(jumpFlag) {
+            moveDirection.y = formData.jumpStrength;
+            jumpFlag = false;
+        } else if(!IsGrounded()) {
+            if(moveDirection.y > 0.05f) {
+                if(Input.GetButton("Jump")) {
+                    moveDirection.y -= formData.gravityBase;
+                } else {
+                    moveDirection.y -= formData.gravityShortHop;
+                }
+            } else
+                moveDirection.y -= formData.gravityFalling;
+            if(moveDirection.y < 0)
+                moveDirection.y -= formData.gravityFalling;
+            else if(moveDirection.y > 0.05f && !Input.GetButton("Jump"))
+                moveDirection.y -= formData.gravityShortHop;
+            else
+                moveDirection.y -= formData.gravityBase;
+        } else {
+            moveDirection.y = 0;
+        }
+        moveDirection.y = Mathf.Clamp(moveDirection.y, Mathf.Abs(formData.maxFallSpeed) * -1f, 50f);
 
-        pawnController.Move(moveDirection * Time.deltaTime);
+        // Apply movement
+        pawnController.Move(moveDirection * Time.fixedDeltaTime);
         pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
-
-        IsGrounded();
-
-        Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
-        ApplyEffects();
     }
 
-    private void RBMovement()
-    {
-        moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
-
-        //converts move direction to world space
-        moveDirection = controlledPawn.transform.TransformVector(moveDirection);
-        moveDirection = moveDirection * speed;
-
-        pawnRigidbody.MovePosition(controlledPawn.transform.position + moveDirection * Time.deltaTime);
-        pawnRigidbody.MoveRotation(Quaternion.Euler(moveRotation * turnSpeed) * controlledPawn.transform.rotation);
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            pawnRigidbody.AddRelativeForce(controlledPawn.transform.up * jumpStrength, ForceMode.Impulse);
-        }
-
-        Utils.WithKeyHold(KeyCode.LeftShift, OnSneakBegin, OnSneakEnd);
-        ApplyEffects();
+    /// <summary>
+    /// Checks if the player is grounded or not. Returns false if the player is attemting to jump.
+    /// </summary>
+    private bool IsGrounded() {
+        //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), Vector3.down, Color.black, 1f, false);
+        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, Quaternion.identity, 0.01f, mask);
     }
-
-    private bool IsGrounded()
-    {
-        //check if the player is more than 0.1f above the ground, if so, they cannot jump
-        //return Physics.Raycast(controlledPawn.transform.position, -controlledPawn.transform.up, controlledPawn.GetComponent<Collider>().bounds.extents.y + 0.1f);
-        return Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, 0.95f), new Vector3(0.25f,0.005f,0.25f), Vector3.down, Quaternion.identity, 0.5f, mask);
-    }
-
 
     private void ChangeAlpha(float alpha)
     {
@@ -120,24 +140,6 @@ public class PlayerController : MonoBehaviour
         var oldColor = mat.color;
         var newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
         mat.SetColor("_Color", newColor);
-    }
-
-    private void RayTrace()
-    {
-        var position = controlledPawn.transform.position;
-        var forward = controlledPawn.transform.forward;
-
-        Debug.DrawRay(position, forward * 10f, Color.red);
-
-        //on LMB 
-        if (!Input.GetMouseButtonDown(0)) return;
-        //if hit object is tagged as controllable, possess it 
-        if (!Physics.Raycast(position, forward, out hitObj, 100, 1)) return;
-
-        if (hitObj.transform.gameObject.CompareTag("PlayerControllable"))
-        {
-            ChangeControlledPawn(hitObj.transform.gameObject);
-        }
     }
 
     private void OnSneakBegin()
@@ -163,29 +165,53 @@ public class PlayerController : MonoBehaviour
         speed = effects.Aggregate(newFlat, (accum, effect) => accum * effect.multiplier);
     }
 
-    //sets controlled pawn to new pawn, resets camera on new pawn
-    private void ChangeControlledPawn(GameObject newPawn)
-    {
-        var temp = controlledPawn;
-        controlledPawn = newPawn;
+    public void ChangeControlledPawn(Form newForm) {
+        if(newForm == currentForm) {
+            Debug.Log("Attempting to switch to current form " + newForm + ".");
+            return;
+        }
+        currentForm = newForm;
+        switch(newForm) {
+            case Form.Human:
+                SetNewPawn(formManager.humanPawn);
+                return;
+            case Form.Bear:
+                SetNewPawn(formManager.GetNewPawn(Form.Bear));
+                return;
+            case Form.Test:
+                SetNewPawn(formManager.GetNewPawn(Form.Test));
+                return;
+            default:
+                Debug.Log("Attempting to switch to form that is not set up in PlayerController.");
+                return;
+        }
+    }
 
-        if (newPawn.GetComponent<Rigidbody>())
-        {
-            pawnRigidbody = newPawn.GetComponent<Rigidbody>();
-        }
-        else
-        {
-            pawnRigidbody = null;
-            pawnController = controlledPawn.GetComponent<CharacterController>();
-        }
+    // Sets controlled pawn to new pawn, resets camera on new pawn
+    private void SetNewPawn(GameObject newPawn) {
+        // set pawn
+        GameObject oldPawn = controlledPawn;
+        controlledPawn = newPawn;
+        pawnController = controlledPawn.GetComponent<CharacterController>();
+
+        // grab new form data
+        formManager.GetNewData(currentForm);
+        Debug.Log(formData.formHeight);
+
+        // retain current position and rotation
+        pawnController.enabled = false;
+        controlledPawn.transform.position = new Vector3(oldPawn.transform.position.x, formData.spawnHeight, oldPawn.transform.position.z);
+        pawnController.enabled = true;
+        controlledPawn.transform.rotation = oldPawn.transform.rotation;
+        controlledPawn.SetActive(true);
+        oldPawn.SetActive(false);
+
+        // set camera transform
         pawnCamera.transform.SetParent(controlledPawn.transform);
         pawnCamera.transform.localPosition = CameraPosition;
         pawnCamera.transform.rotation = controlledPawn.transform.rotation * Quaternion.Euler(15.0f, 0f, 0f);
 
-        // retain current rotation
-        controlledPawn.transform.rotation = temp.transform.rotation;
-
-
+        // grab additional components
+        anim = controlledPawn.GetComponent<Animator>();
     }
-
 }

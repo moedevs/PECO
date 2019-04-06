@@ -97,7 +97,37 @@ ModelImporter:
     4300030: BrowR
     4300032: bez_hairlock.000
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bear
+    second: {fileID: 2100000, guid: 23000a29df8391c408d5e9de17725fb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye
+    second: {fileID: 2100000, guid: 27c929be14f417e40a1272814d9124d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair
+    second: {fileID: 2100000, guid: 9da1c57161800564991467225c18c940, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bow
+    second: {fileID: 2100000, guid: a36d673f588b17340868eddd92cbdf16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: face
+    second: {fileID: 2100000, guid: 4396cae07ad8f064fa8ae7072f2c4219, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zipper
+    second: {fileID: 2100000, guid: af2c6da28754a3a4f8523756b3418d75, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 1789768235
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: testcapsule
+      Dependencies: {}
+    Info_1:
+      Name: pecobear
+      Dependencies: {}
+    Info_2:
+      Name: formdata
+      Dependencies: {}

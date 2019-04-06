@@ -6,6 +6,10 @@ TagManager:
   tags:
   - PlayerControllable
   - Terrain
+  - ScissorAttack
+  - EnemyAttack
+  - PlayerAttack
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,10 +21,10 @@ TagManager:
   - 
   - PostProcessing
   - Terrain
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - PlayerAttack
+  - EnemyAttack
   - 
   - 
   - 

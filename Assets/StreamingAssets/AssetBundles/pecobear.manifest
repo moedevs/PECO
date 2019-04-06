@@ -1,0 +1,44 @@
+ManifestFileVersion: 0
+CRC: 1490682583
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 38fc909ccb62dc0ac8c9368d2595df16
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a127fc45d18a16380f09835e62fa179b
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4ae38234b2a12c94ea13848d22f53e47, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 143
+  Script: {instanceID: 0}
+Assets:
+- Assets/_Prefabs/PecoBear.prefab
+Dependencies: []

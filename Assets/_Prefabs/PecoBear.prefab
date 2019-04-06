@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 35644073}
   - component: {fileID: 35644075}
   - component: {fileID: 35644074}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 101887447}
   - component: {fileID: 101887449}
   - component: {fileID: 101887448}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 180703357}
   - component: {fileID: 180703359}
   - component: {fileID: 180703358}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 285775865}
   - component: {fileID: 285775867}
   - component: {fileID: 285775866}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 303199985}
   - component: {fileID: 303199987}
   - component: {fileID: 303199986}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 405159334}
   - component: {fileID: 405159336}
   - component: {fileID: 405159335}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_bevalA.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 601256398}
   - component: {fileID: 601256400}
   - component: {fileID: 601256399}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Peco_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 698398357}
   - component: {fileID: 698398359}
   - component: {fileID: 698398358}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BrowL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,8 +626,9 @@ GameObject:
   m_Component:
   - component: {fileID: 726576753}
   - component: {fileID: 726576752}
-  m_Layer: 0
-  m_Name: PecoExp
+  - component: {fileID: 5296755408752467472}
+  m_Layer: 10
+  m_Name: PecoBear
   m_TagString: PlayerControllable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +642,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 726576751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.35, y: 1, z: 1.76}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 931209079}
@@ -661,6 +662,7 @@ Transform:
   - {fileID: 303199985}
   - {fileID: 601256398}
   - {fileID: 1262457722}
+  - {fileID: 3005197349312814505}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -675,13 +677,32 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.8
+  m_Height: 1.65
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: -0.1, y: 0.1, z: 0}
+--- !u!95 &5296755408752467472
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726576751}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 617f4a7938e936544976b10e62f3ce8b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &821355590
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +714,7 @@ GameObject:
   - component: {fileID: 821355591}
   - component: {fileID: 821355593}
   - component: {fileID: 821355592}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -770,7 +791,7 @@ GameObject:
   - component: {fileID: 931209079}
   - component: {fileID: 931209081}
   - component: {fileID: 931209080}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_bevalA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +868,7 @@ GameObject:
   - component: {fileID: 993975105}
   - component: {fileID: 993975107}
   - component: {fileID: 993975106}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_taperA.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +945,7 @@ GameObject:
   - component: {fileID: 1262457722}
   - component: {fileID: 1262457724}
   - component: {fileID: 1262457723}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Zipper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +1022,7 @@ GameObject:
   - component: {fileID: 1401959371}
   - component: {fileID: 1401959373}
   - component: {fileID: 1401959372}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,7 +1099,7 @@ GameObject:
   - component: {fileID: 1478278274}
   - component: {fileID: 1478278276}
   - component: {fileID: 1478278275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1176,7 @@ GameObject:
   - component: {fileID: 1921427853}
   - component: {fileID: 1921427855}
   - component: {fileID: 1921427854}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_hairlock.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1232,7 +1253,7 @@ GameObject:
   - component: {fileID: 2071401100}
   - component: {fileID: 2071401102}
   - component: {fileID: 2071401101}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BrowR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1309,7 +1330,7 @@ GameObject:
   - component: {fileID: 2111813686}
   - component: {fileID: 2111813688}
   - component: {fileID: 2111813687}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bez_taperA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1375,3 +1396,107 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &1980257737180414323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3005197349312814505}
+  - component: {fileID: 7262473193691625751}
+  - component: {fileID: 4118612831396303637}
+  - component: {fileID: 5890548308639999195}
+  - component: {fileID: 2421700312496117537}
+  m_Layer: 12
+  m_Name: Scissors
+  m_TagString: ScissorAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3005197349312814505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980257737180414323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7, y: 0.05, z: 0.5}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_Children: []
+  m_Father: {fileID: 726576753}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7262473193691625751
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980257737180414323}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4118612831396303637
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980257737180414323}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8424c2a4b80a95e4094a5d80a3ed9366, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &5890548308639999195
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980257737180414323}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2421700312496117537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980257737180414323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae38234b2a12c94ea13848d22f53e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
