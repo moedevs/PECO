@@ -18,26 +18,10 @@ public class FormManager : MonoBehaviour {
     private void Awake() {
         player = GetComponent<PlayerController>();
         // load AssetBundles
-        formBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/formdata"));
-        if(formBundle == null) {
-            Debug.LogError("Failed to load AssetBundle \"formdata\"!");
-            return;
-        }
-        /*pecoHumanBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/pecohuman"));
-        if(pecoHumanBundle == null) {
-            Debug.LogError("Failed to load AssetBundle \"pecohuman\"!");
-            //return;
-        }*/
-        pecoTestBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/testcapsule"));
-        if(pecoTestBundle == null) {
-            Debug.LogError("Failed to load AssetBundle \"testcapsule\"!");
-            return;
-        }
-        pecoBearBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/pecobear"));
-        if(pecoBearBundle == null) {
-            Debug.LogError("Failed to load AssetBundle \"pecobear\"!");
-            return;
-        }
+        LoadBundle("formdata");
+        //LoadBundle("pecohuman");
+        LoadBundle("pecobear");
+        LoadBundle("testcapsule");
         // set player FormData
         if(player.formData == null)
             player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");
@@ -64,6 +48,11 @@ public class FormManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Returns pawn of type newForm, if it exists. If it doesn't, a new pawn is loaded from the respective AssetBundle and created.
+    /// </summary>
+    /// <param name="newForm">The type of pawn to return.</param>
+    /// <returns>Pawn of type newForm.</returns>
     public GameObject GetNewPawn(PlayerController.Form newForm) {
         switch(newForm) {
             case PlayerController.Form.Human:
@@ -82,10 +71,12 @@ public class FormManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Sets the player's formData to the data for form newForm.
+    /// </summary>
     public void GetNewData(PlayerController.Form newForm) {
         switch(newForm) {
             case PlayerController.Form.Human:
-                player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");
                 player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");
                 return;
             case PlayerController.Form.Bear:
@@ -96,6 +87,55 @@ public class FormManager : MonoBehaviour {
                 return;
             default:
                 Debug.Log("Attempting to switch to form that is not set up in FormManager.");
+                return;
+        }
+    }
+
+    /// <summary>
+    /// Loads asset bundle with name bundleName. Should only be called in between scenes, such as during a loading screen.
+    /// </summary>
+    /// <param name="bundleName">The name of the asset bundle to be loaded.</param>
+    public void LoadBundle(string bundleName) {
+        switch(bundleName) {
+            case "formdata":
+                formBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/formdata"));
+                return;
+            case "pecohuman":
+                pecoHumanBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/pecohuman"));
+                return;
+            case "testcapsule":
+                pecoTestBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/testcapsule"));
+                return;
+            case "pecobear":
+                pecoBearBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "AssetBundles/pecobear"));
+                return;
+            default:
+                Debug.Log("Attempting to load invalid AssetBundle \"" + bundleName + "\"!");
+                return;
+        }
+    }
+
+    /// <summary>
+    /// Unloads asset bundle with name bundleName, with load type unloadType. Should only be called in between scenes, such as during a loading screen.
+    /// </summary>
+    /// <param name="bundleName">The name of the asset bundle to be unloaded.</param>
+    /// <param name="unloadType">If true, all assets in the bundle will be unloaded and destroyed. If false, only compressed assets in the bundle are unloaded.</param>
+    public void UnloadBundle(string bundleName, bool unloadType = true) {
+        switch(bundleName) {
+            case "formdata":
+                formBundle.Unload(unloadType);
+                return;
+            case "pecohuman":
+                pecoHumanBundle.Unload(unloadType);
+                return;
+            case "testcapsule":
+                pecoTestBundle.Unload(unloadType);
+                return;
+            case "pecobear":
+                pecoBearBundle.Unload(unloadType);
+                return;
+            default:
+                Debug.Log("Attempting to unload invalid AssetBundle \"" + bundleName + "\"!");
                 return;
         }
     }

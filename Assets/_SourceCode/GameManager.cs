@@ -11,30 +11,33 @@ public class GameManager : MonoBehaviour {
         if (gm == null) {
             gm = this;
             DontDestroyOnLoad(this.gameObject);
-        }
-        else {
+        } else {
             Destroy(this.gameObject);
         }
     }
 
-    private void Update() {
-
-    }
-
-    private void Test() {
-        if (Input.GetButtonDown("Pause"))
-            Debug.Log("button down");
-        else if (Input.GetAxisRaw("RemoveCostume") > 0.05)
-            Debug.Log("axis down");
-    }
-
     public void LoadScene(string scene) {
-        try {
-            LoadScene(scene);
-        }
-        catch {
-            Debug.LogError("Attempting to load invalid scene " + scene);
-        }
+        StartCoroutine(LoadAsync(scene));
+    }
+
+    private IEnumerator LoadAsync(string scene) {
+        AsyncOperation async = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        while(!async.isDone)
+            yield return null;
+    }
+
+    public void SetScene(string scene) {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
+    }
+
+    public void UnloadScene(string scene) {
+        StartCoroutine(UnloadAsync(scene));
+    }
+
+    private IEnumerator UnloadAsync(string scene) {
+        AsyncOperation async = SceneManager.UnloadSceneAsync(scene);
+        while(!async.isDone)
+            yield return null;
     }
 
     public void ExitGame() {
