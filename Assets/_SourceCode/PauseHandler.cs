@@ -22,7 +22,7 @@ public class PauseHandler : MonoBehaviour
         MouseLock();
     }
 
-    private void PauseGame() {
+    public void PauseGame() {
         paused = !paused;
         try {
             PauseMenu.SetActive(paused);

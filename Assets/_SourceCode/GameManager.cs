@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager gm;
 
-    public PauseHandler ph;
+    [HideInInspector] public PauseHandler ph;
 
     private void Awake() {
         if (gm == null) {
@@ -29,10 +29,6 @@ public class GameManager : MonoBehaviour {
             yield return null;
     }
 
-    public void SetScene(string scene) {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
-    }
-
     public void UnloadScene(string scene) {
         StartCoroutine(UnloadAsync(scene));
     }
@@ -41,6 +37,16 @@ public class GameManager : MonoBehaviour {
         AsyncOperation async = SceneManager.UnloadSceneAsync(scene);
         while(!async.isDone)
             yield return null;
+    }
+
+    public IEnumerator UnloadAsync(Scene scene) {
+        AsyncOperation async = SceneManager.UnloadSceneAsync(scene);
+        while(!async.isDone)
+            yield return null;
+    }
+
+    public void SetScene(string scene) {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
     }
 
     public void ExitGame() {
