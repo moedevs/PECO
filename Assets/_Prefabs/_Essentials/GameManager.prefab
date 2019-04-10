@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055616b55225d91408bdc6b8a63a4d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ph: {fileID: 0}
+  displayEnemyFOV: 1
 --- !u!114 &714765047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,3 +59,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 0}
+  paused: 0
+  canPause: 0

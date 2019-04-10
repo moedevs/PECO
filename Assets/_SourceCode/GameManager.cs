@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
     public static GameManager gm;
-
     [HideInInspector] public PauseHandler ph;
+
+    public bool displayEnemyFOV;
 
     private void Awake() {
         if (gm == null) {
