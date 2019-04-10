@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject controlledPawn;
     private CharacterController pawnController;
     public Camera pawnCamera;
-    private RaycastHit hitObj;
+    private Vector3 moveNorm;
+    //private RaycastHit hitObj;
     public LayerMask mask;
     private bool jumpFlag = false;
     [HideInInspector] public bool canAct;
@@ -95,8 +96,9 @@ public class PlayerController : MonoBehaviour
 
     private void Movement() {
         // Retrieve inputs
-        moveDirection.x = Input.GetAxis("Horizontal") * formData.walkSpeed;
-        moveDirection.z = Input.GetAxis("Vertical") * formData.walkSpeed;
+        moveNorm = Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * formData.walkSpeed;
+        moveDirection.x = moveNorm.x;
+        moveDirection.z = moveNorm.z;
         moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
         moveDirection = controlledPawn.transform.TransformVector(moveDirection);
         
