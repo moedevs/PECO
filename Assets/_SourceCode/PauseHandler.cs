@@ -7,7 +7,7 @@ public class PauseHandler : MonoBehaviour
     public GameObject PauseMenu;
 
     private float timeMarker;
-    private bool paused, canPause;
+    [HideInInspector] public bool paused, canPause;
 
     void Awake() {
         timeMarker = 1f;
@@ -22,15 +22,17 @@ public class PauseHandler : MonoBehaviour
         MouseLock();
     }
 
-    private void PauseGame() {
+    public void PauseGame() {
         paused = !paused;
-        PauseMenu.SetActive(paused);
         try {
+            PauseMenu.SetActive(paused);
             if(paused) {
                 timeMarker = Time.timeScale;
                 Time.timeScale = 0;
+                PlayerController.pc.canAct = false;
             } else {
                 Time.timeScale = timeMarker;
+                PlayerController.pc.canAct = true;
                 MouseLock();
             }
         } catch {

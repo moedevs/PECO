@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private RaycastHit hitObj;
     public LayerMask mask;
     private bool jumpFlag = false;
+    [HideInInspector] public bool canAct;
 
     // Costume/form functionality
     [HideInInspector] public Form currentForm;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         } else
             Destroy(gameObject);
         currentForm = Form.Test;
+        canAct = true;
 
         // set controlledPawn
         if(controlledPawn == null) {
@@ -76,9 +78,9 @@ public class PlayerController : MonoBehaviour
     private void Update() {
         if(controlledPawn == null)
             return;
-        if(!jumpFlag && Input.GetButtonDown("Jump") && IsGrounded())
+        if(canAct && !jumpFlag && Input.GetButtonDown("Jump") && IsGrounded())
             jumpFlag = true;
-        if(Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard"))
+        if(canAct && (Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard")))
             anim.SetTrigger("Attack");
     }
 
@@ -86,7 +88,8 @@ public class PlayerController : MonoBehaviour
         if (controlledPawn == null)
             return;
         // Apply movement
-        Movement();
+        if(canAct)
+            Movement();
         //RayTrace();
     }
 
@@ -196,7 +199,6 @@ public class PlayerController : MonoBehaviour
 
         // grab new form data
         formManager.GetNewData(currentForm);
-        Debug.Log(formData.formHeight);
 
         // retain current position and rotation
         pawnController.enabled = false;
