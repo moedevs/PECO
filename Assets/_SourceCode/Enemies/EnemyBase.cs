@@ -57,16 +57,17 @@ public class EnemyBase : MonoBehaviour {
         // Lose interest if player is out of range
         if(outOfRange) {
             switch(behavior.detectedState) {
-                case BehaviorBase.DetectedMode.Unaware:
-
-                    break;
+                /*case BehaviorBase.DetectedMode.Unaware:
+                    break;*/
                 case BehaviorBase.DetectedMode.Suspicious:
                     behavior.timer += Time.deltaTime;
                     behavior.currentDetection -= behavior.timer >= behavior.giveUpTime ? detectLoss * Time.deltaTime : 0;
                     break;
                 case BehaviorBase.DetectedMode.Detected:
-                    behavior.timer += Time.deltaTime / 2f;
-                    behavior.currentDetection -= behavior.timer >= behavior.giveUpTime ? detectLoss * Time.deltaTime * 0.25f : 0;
+                    behavior.timer += Time.deltaTime * 0.5f;
+                    behavior.currentDetection -= behavior.timer >= behavior.giveUpTime 
+                        ? behavior.timer >= behavior.giveUpTime * 2 ? detectGain * Time.deltaTime
+                        : detectLoss * Time.deltaTime * 0.5f : 0;
                     break;
                 default:
                     break;
