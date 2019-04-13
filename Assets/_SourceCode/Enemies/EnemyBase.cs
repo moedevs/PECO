@@ -45,7 +45,8 @@ public class EnemyBase : MonoBehaviour {
                 if(hit.collider.CompareTag("PlayerControllable")) {
                     //Debug.Log("player in field of view");
                     behavior.currentDetection += detectGain * Time.deltaTime;
-                    outOfRange = true;
+                    behavior.lastKnownPlayerPos = player.transform.position;
+                    outOfRange = false;
                 } else {
                     //Debug.Log("player obscured by terrain");
                     outOfRange = true;
