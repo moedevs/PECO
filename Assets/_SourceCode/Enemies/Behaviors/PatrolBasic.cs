@@ -12,7 +12,8 @@ public class PatrolBasic : BehaviorBase {
     private bool waiting;
     private NavMeshAgent agent;
 
-    protected virtual void Start() {
+    protected override void Start() {
+        base.Start();
         agent = GetComponent<NavMeshAgent>();
         currentPoint = 0;
         agent.SetDestination(patrolPoints[0].position);
