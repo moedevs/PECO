@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
     public static PlayerController pc;
 
     // PlayerController/movement functionality
-    [SerializeField] private GameObject controlledPawn;
+    public GameObject controlledPawn;
     private CharacterController pawnController;
-    public Camera pawnCamera;
+    [SerializeField] private Camera pawnCamera;
     private Vector3 moveNorm;
     //private RaycastHit hitObj;
     public LayerMask mask;
@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
         pawnController = controlledPawn.GetComponent<CharacterController>();
 
         // Sets the camera to be a child of the controlled pawn
+        if(pawnCamera == null)
+            pawnCamera = Camera.main;
         pawnCamera.transform.SetParent(controlledPawn.transform);
 
         // Force set the cameras position 
