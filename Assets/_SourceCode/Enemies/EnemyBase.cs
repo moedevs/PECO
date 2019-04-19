@@ -75,12 +75,17 @@ public class EnemyBase : MonoBehaviour {
             }
         }
         //Debug.Log("Timer: " + behavior.timer + ", Detection: " + behavior.currentDetection);
-
     }
 
     private void OnDestroy() {
         foreach(Transform child in transform)
             Destroy(child.gameObject);
+    }
+
+    protected virtual void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("ScissorAttack")) {
+            Destroy(gameObject);
+        }
     }
 
 }
