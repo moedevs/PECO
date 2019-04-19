@@ -1012,7 +1012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706579576}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -14.68, y: 1.03, z: 6.29}
+  m_LocalPosition: {x: -14.68, y: 4.4, z: 6.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 938470687}
@@ -1062,6 +1062,7 @@ MonoBehaviour:
   audioListenRange: 0
   detectGain: 30
   detectLoss: 10
+  gravity: 0.5
 --- !u!114 &706579583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,6 +1087,7 @@ MonoBehaviour:
   - {fileID: 1739506028}
   waitTime: 1
   pauseTime: 1
+  attackRange: 1.5
 --- !u!1 &709933315
 GameObject:
   m_ObjectHideFlags: 0

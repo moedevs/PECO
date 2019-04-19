@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class PatrolBasic : BehaviorBase {
 
     public Transform[] patrolPoints;
-    public float waitTime, pauseTime;
+    public float waitTime, pauseTime, attackRange;
 
     private int currentPoint;
     private bool waiting;
@@ -26,9 +26,8 @@ public class PatrolBasic : BehaviorBase {
         base.OnIdle();
         if(detectedState != DetectedMode.Unaware)
             agent.SetDestination(patrolPoints[currentPoint].position);
-        if(!waiting && AtDestination()) {
+        if(!waiting && AtDestination())
             StartCoroutine(StartWait());
-        }
     }
 
     public override void OnFirstSuspicious() {
@@ -46,6 +45,12 @@ public class PatrolBasic : BehaviorBase {
         base.OnDetectPlayer();
         Debug.Log("detected");
         waiting = false;
+        if(Vector3.Distance(transform.position, PlayerController.pc.controlledPawn.transform.position) >= attackRange) {
+            agent.isStopped = false;
+        } else {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
         agent.SetDestination(PlayerController.pc.controlledPawn.transform.position);
     }
 

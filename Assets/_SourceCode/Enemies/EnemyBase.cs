@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour {
     
-    public float maxHealth, health, baseDamage, viewRangeAngle, viewRangeDistance, audioListenRange, detectGain, detectLoss;
+    public float maxHealth, health, baseDamage, viewRangeAngle, viewRangeDistance, audioListenRange, detectGain, detectLoss, gravity;
     
     private bool outOfRange;
     private GameObject viewRangeLight, player;
@@ -67,8 +67,8 @@ public class EnemyBase : MonoBehaviour {
                 case BehaviorBase.DetectedMode.Detected:
                     behavior.timer += Time.deltaTime * 0.5f;
                     behavior.currentDetection -= behavior.timer >= behavior.giveUpTime 
-                        ? behavior.timer >= behavior.giveUpTime * 2 ? detectGain * Time.deltaTime
-                        : detectLoss * Time.deltaTime * 0.5f : 0;
+                        ? behavior.timer >= behavior.giveUpTime * 1.5f ? detectGain * Time.deltaTime
+                        : detectLoss * Time.deltaTime * 0.75f : 0;
                     break;
                 default:
                     break;
