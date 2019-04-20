@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1525148548
+CRC: 2056283030
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 968f24df754d3e6c33c74b54308f2ce1
+    Hash: 4e8a9c726c2680b79856881b66f03bd1
   TypeTreeHash:
     serializedVersion: 2
     Hash: c5336c623c567c3d5ceb3eade2235ac1
@@ -38,5 +38,8 @@ ClassTypes:
 - Class: 143
   Script: {instanceID: 0}
 Assets:
-- Assets/_Prefabs/PecoTestCapsule.prefab
+- Assets/_Prefabs/Player/PecoTestCapsule.prefab
+- Assets/_Art/_Animations/PecoTest/PecoTest.controller
+- Assets/_Art/_Animations/PecoTest/ScissorTest.anim
+- Assets/_Art/_Animations/PecoTest/PecoTest.anim
 Dependencies: []

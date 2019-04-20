@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1490682583
+CRC: 3920955652
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 38fc909ccb62dc0ac8c9368d2595df16
+    Hash: ee3df8c2ea74de9e3d1c735ab4dc4f16
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a127fc45d18a16380f09835e62fa179b
+    Hash: 6c5ab17cab169306023d195d2c327d1a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -35,10 +35,15 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 4ae38234b2a12c94ea13848d22f53e47, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3dcc0970e2891c440bd2021ae1feea4f, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 143
   Script: {instanceID: 0}
 Assets:
-- Assets/_Prefabs/PecoBear.prefab
+- Assets/_Art/_Animations/PecoBearTest/PecoBearTest.anim
+- Assets/_Art/_Animations/PecoBearTest/PecoBearAttack.anim
+- Assets/_Art/_Animations/PecoBearTest/PecoBearTest.controller
+- Assets/_Prefabs/Player/PecoBear.prefab
 Dependencies: []

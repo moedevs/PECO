@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     public FormDataBase formData;
     private FormManager formManager;
 
+    // Attacking functionality
+    public float attackHoldTimer = 0f;
+
     // Input variables 
     private const float baseSpeed = 12.0f;
     public float speed = baseSpeed;
@@ -81,10 +84,57 @@ public class PlayerController : MonoBehaviour
     private void Update() {
         if(controlledPawn == null)
             return;
+
+        // Movement
         if(canAct && !jumpFlag && Input.GetButtonDown("Jump") && IsGrounded())
             jumpFlag = true;
-        if(canAct && (Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard")))
-            anim.SetTrigger("Attack");
+
+        // Attacking
+        if(canAct) {
+            if(currentForm == Form.Human || currentForm == Form.Test) {
+                if(Input.GetButtonDown("AttackStandard") || Input.GetButtonDown("AttackScissor"))
+                    anim.SetTrigger("Scissor");
+                attackHoldTimer = 0;
+            } else {
+                /*if(Input.GetButtonDown("AttackStandard")) {
+                    if(IsGrounded())
+                        anim.SetTrigger("AirAttack");
+                    else {
+                        anim.SetTrigger("Attack");
+                    }
+                } else if(Input.GetButtonDown("AttackScissor"))
+                    anim.SetTrigger("Scissor");*/
+                /*if(Input.GetButtonDown("AttackStandard") && !IsGrounded()) {
+                    anim.SetTrigger("AirAttack");
+                } else if(Input.GetButtonUp("AttackStandard")) {
+                    if(attackHoldTimer <= 0.2f) {
+                        anim.SetTrigger("Attack");
+                    } else {
+                        anim.SetTrigger("ChargedAttack");
+                    }
+                    attackHoldTimer = 0;
+                } else if(Input.GetButton("AttackStandard")) {
+                    attackHoldTimer += Time.deltaTime;
+                } else if(Input.GetButtonDown("AttackScissor")) {
+                    //anim.SetTrigger("Scissor");
+                }*/
+                if(Input.GetButtonDown("AttackStandard")) {
+                    if(!IsGrounded())
+                        anim.SetTrigger("AirAttack");
+                    else {
+                        anim.SetTrigger("Attack");
+                    }
+                    attackHoldTimer = 0;
+                } else if(Input.GetButton("AttackStandard")) {
+                    attackHoldTimer += Time.deltaTime;
+                } else if(Input.GetButtonUp("AttackStandard")) {
+                    
+                    attackHoldTimer = 0;
+                } else if(Input.GetButtonDown("AttackScissor")) {
+                    //anim.SetTrigger("Scissor");
+                }
+            }
+        }
     }
 
     private void FixedUpdate() {

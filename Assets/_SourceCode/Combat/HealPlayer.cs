@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Heal : MonoBehaviour {
+public class HealPlayer : MonoBehaviour {
 
     public int amount;
 

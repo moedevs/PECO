@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour {
-    
-    public float maxHealth, health, baseDamage, viewRangeAngle, viewRangeDistance, audioListenRange, detectGain, detectLoss, gravity;
-    
+
+    [HideInInspector] public int health;
+    public int maxHealth, baseDamage;
+    public float viewRangeAngle, viewRangeDistance, audioListenRange, detectGain, detectLoss, gravity;
+
     private bool outOfRange;
     private GameObject viewRangeLight, player;
     private BehaviorBase behavior;
@@ -17,6 +19,7 @@ public class EnemyBase : MonoBehaviour {
             Debug.LogError("Failed to get FOV Light child object of " + gameObject);
         }
         behavior = GetComponent<BehaviorBase>();
+        health = maxHealth;
     }
 
     private void Start() {
@@ -33,6 +36,11 @@ public class EnemyBase : MonoBehaviour {
     }
 
     private void Update() {
+        // Check health
+        if(health <= 0) {
+            Destroy(gameObject);
+        }
+
         // Detect if player's controlled pawn changed, and reset reference if so
         if(player != PlayerController.pc.controlledPawn)
             player = PlayerController.pc.controlledPawn;
