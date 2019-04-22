@@ -96,28 +96,6 @@ public class PlayerController : MonoBehaviour
                     anim.SetTrigger("Scissor");
                 attackHoldTimer = 0;
             } else {
-                /*if(Input.GetButtonDown("AttackStandard")) {
-                    if(IsGrounded())
-                        anim.SetTrigger("AirAttack");
-                    else {
-                        anim.SetTrigger("Attack");
-                    }
-                } else if(Input.GetButtonDown("AttackScissor"))
-                    anim.SetTrigger("Scissor");*/
-                /*if(Input.GetButtonDown("AttackStandard") && !IsGrounded()) {
-                    anim.SetTrigger("AirAttack");
-                } else if(Input.GetButtonUp("AttackStandard")) {
-                    if(attackHoldTimer <= 0.2f) {
-                        anim.SetTrigger("Attack");
-                    } else {
-                        anim.SetTrigger("ChargedAttack");
-                    }
-                    attackHoldTimer = 0;
-                } else if(Input.GetButton("AttackStandard")) {
-                    attackHoldTimer += Time.deltaTime;
-                } else if(Input.GetButtonDown("AttackScissor")) {
-                    //anim.SetTrigger("Scissor");
-                }*/
                 if(Input.GetButtonDown("AttackStandard")) {
                     if(!IsGrounded())
                         anim.SetTrigger("AirAttack");
@@ -134,6 +112,15 @@ public class PlayerController : MonoBehaviour
                     //anim.SetTrigger("Scissor");
                 }
             }
+        }
+    }
+
+    private void LateUpdate() {
+        if(currentForm != Form.Human && currentForm != Form.Test) {
+            if(IsGrounded())
+                anim.SetBool("Grounded", true);
+            else
+                anim.SetBool("Grounded", false);
         }
     }
 
