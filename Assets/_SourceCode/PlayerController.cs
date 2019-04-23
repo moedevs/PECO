@@ -103,11 +103,14 @@ public class PlayerController : MonoBehaviour
                         anim.SetTrigger("Attack");
                     }
                     attackHoldTimer = 0;
+                    anim.SetBool("ChargeRelease", false);
                 } else if(Input.GetButton("AttackStandard")) {
                     attackHoldTimer += Time.deltaTime;
+                    if(attackHoldTimer >= 0.75f)
+                        anim.SetTrigger("ChargeAttack");
                 } else if(Input.GetButtonUp("AttackStandard")) {
-                    
                     attackHoldTimer = 0;
+                    anim.SetBool("ChargeRelease", true);
                 } else if(Input.GetButtonDown("AttackScissor")) {
                     //anim.SetTrigger("Scissor");
                 }
