@@ -43,13 +43,15 @@ public class PatrolBasic : BehaviorBase {
     public override void OnDetectPlayer() {
         base.OnDetectPlayer();
         waiting = false;
-        if(Vector3.Distance(transform.position, PlayerController.pc.controlledPawn.transform.position) >= attackRange) {
-            agent.isStopped = false;
+        if(Vector3.Distance(transform.position, PlayerController.pc.controlledPawn.transform.position) <= attackRange) {
+            //agent.isStopped = false;
+            agent.SetDestination(transform.position);
         } else {
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
+            //agent.isStopped = true;
+            //agent.velocity = Vector3.zero;
+            agent.SetDestination(PlayerController.pc.controlledPawn.transform.position);
         }
-        agent.SetDestination(PlayerController.pc.controlledPawn.transform.position);
+        //agent.SetDestination(PlayerController.pc.controlledPawn.transform.position);
     }
 
     protected void NextDestination() {
@@ -78,6 +80,10 @@ public class PatrolBasic : BehaviorBase {
         if(detectedState == DetectedMode.Suspicious)
             agent.SetDestination(lastKnownPlayerPos);
         agent.isStopped = false;
+    }
+
+    public override bool WithinAttackRange() {
+        return Vector3.Distance(transform.position, PlayerController.pc.controlledPawn.transform.position) <= attackRange;
     }
 
 }

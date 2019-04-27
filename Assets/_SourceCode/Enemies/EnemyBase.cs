@@ -8,21 +8,23 @@ public class EnemyBase : MonoBehaviour {
     public int maxHealth, baseDamage;
     public float viewRangeAngle, viewRangeDistance, audioListenRange, detectGain, detectLoss, gravity;
 
-    private bool outOfRange;
-    private GameObject viewRangeLight, player;
-    private BehaviorBase behavior;
+    protected bool outOfRange;
+    protected GameObject viewRangeLight, player;
+    protected BehaviorBase behavior;
+    protected Animator anim;
 
-    private void Awake() {
+    protected virtual void Awake() {
         try {
             viewRangeLight = transform.GetChild(0).gameObject;
         } catch {
             Debug.LogError("Failed to get FOV Light child object of " + gameObject);
         }
         behavior = GetComponent<BehaviorBase>();
+        anim = GetComponent<Animator>();
         health = maxHealth;
     }
 
-    private void Start() {
+    protected virtual void Start() {
         if(viewRangeLight != null) {
             if(!GameManager.gm.displayEnemyFOV)
                 Destroy(viewRangeLight);
@@ -35,7 +37,7 @@ public class EnemyBase : MonoBehaviour {
         player = PlayerController.pc.controlledPawn;
     }
 
-    private void Update() {
+    protected virtual void Update() {
         // Check health
         if(health <= 0) {
             Destroy(gameObject);
@@ -85,7 +87,7 @@ public class EnemyBase : MonoBehaviour {
         //Debug.Log("Timer: " + behavior.timer + ", Detection: " + behavior.currentDetection);
     }
 
-    private void OnDestroy() {
+    protected void OnDestroy() {
         foreach(Transform child in transform)
             Destroy(child.gameObject);
     }
@@ -94,6 +96,10 @@ public class EnemyBase : MonoBehaviour {
         if(other.CompareTag("ScissorAttack")) {
             Destroy(gameObject);
         }
+    }
+
+    public virtual void Attack() {
+
     }
 
 }
