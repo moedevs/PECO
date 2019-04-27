@@ -36,16 +36,26 @@ public class BehaviorBase : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Continuously called when the enemy is unaware of the player
+    /// </summary>
     public virtual void OnIdle() {
         susFlag = false;
         detFlag = false;
     }
 
+
+    /// <summary>
+    /// Called once when the enemy first becomes suspicous of the player
+    /// </summary>
     public virtual void OnFirstSuspicious() {
         susFlag = true;
         StartCoroutine(DisplayText("?", 1.5f));
     }
 
+    /// <summary>
+    /// Continuously called while the enemy is suspicous of the player
+    /// </summary>
     public virtual void OnSuspicious() {
         detectedState = DetectedMode.Suspicious;
         detFlag = false;
@@ -53,11 +63,17 @@ public class BehaviorBase : MonoBehaviour {
             OnFirstSuspicious();
     }
 
+    /// <summary>
+    /// Called once when the enemy first detects the player
+    /// </summary>
     public virtual void OnFirstDetectPlayer() {
         detFlag = true;
         StartCoroutine(DisplayText("!", 2f));
     }
 
+    /// <summary>
+    /// Called continuously while the enemy has detected the player
+    /// </summary>
     public virtual void OnDetectPlayer() {
         detectedState = DetectedMode.Detected;
         susFlag = false;
@@ -65,6 +81,9 @@ public class BehaviorBase : MonoBehaviour {
             OnFirstDetectPlayer();
     }
 
+    /// <summary>
+    /// Displays "?" and "!" markers above the enemy for suspicion and detection, respectively
+    /// </summary>
     public virtual IEnumerator DisplayText(string newText, float time = 1f) {
         float timer = 0;
         Text tText = text.GetComponent<Text>();
@@ -79,10 +98,17 @@ public class BehaviorBase : MonoBehaviour {
             text.SetActive(false);
     }
 
+    /// <summary>
+    /// Sets rotation of "?" and "!" markers to face the camera
+    /// </summary>
     protected void SetTextRot() {
         Vector3 camera = Camera.main.transform.position;
         camera.y = 0;
         text.GetComponent<RectTransform>().LookAt(camera);
+    }
+
+    public virtual bool WithinAttackRange() {
+        return false;
     }
 
 }
