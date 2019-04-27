@@ -37,13 +37,11 @@ public class PatrolBasic : BehaviorBase {
 
     public override void OnSuspicious() {
         base.OnSuspicious();
-        Debug.Log("suspicious");
         waiting = false;
     }
 
     public override void OnDetectPlayer() {
         base.OnDetectPlayer();
-        Debug.Log("detected");
         waiting = false;
         if(Vector3.Distance(transform.position, PlayerController.pc.controlledPawn.transform.position) >= attackRange) {
             agent.isStopped = false;
