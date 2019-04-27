@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     public FormDataBase formData;
     private FormManager formManager;
 
+    // Attacking functionality
+    public float attackHoldTimer = 0f;
+
     // Input variables 
     private const float baseSpeed = 12.0f;
     public float speed = baseSpeed;
@@ -83,10 +86,47 @@ public class PlayerController : MonoBehaviour
     private void Update() {
         if(controlledPawn == null)
             return;
+
+        // Movement
         if(canAct && !jumpFlag && Input.GetButtonDown("Jump") && IsGrounded())
             jumpFlag = true;
-        if(canAct && (Input.GetButtonDown("AttackScissor") || Input.GetButtonDown("AttackStandard")))
-            anim.SetTrigger("Attack");
+
+        // Attacking
+        if(canAct) {
+            if(currentForm == Form.Human || currentForm == Form.Test) {
+                if(Input.GetButtonDown("AttackStandard") || Input.GetButtonDown("AttackScissor"))
+                    anim.SetTrigger("Scissor");
+                attackHoldTimer = 0;
+            } else {
+                if(Input.GetButtonDown("AttackStandard")) {
+                    if(!IsGrounded())
+                        anim.SetTrigger("AirAttack");
+                    else {
+                        anim.SetTrigger("Attack");
+                    }
+                    attackHoldTimer = 0;
+                    anim.SetBool("ChargeRelease", false);
+                } else if(Input.GetButton("AttackStandard")) {
+                    attackHoldTimer += Time.deltaTime;
+                    if(attackHoldTimer >= 0.75f)
+                        anim.SetTrigger("ChargeAttack");
+                } else if(Input.GetButtonUp("AttackStandard")) {
+                    attackHoldTimer = 0;
+                    anim.SetBool("ChargeRelease", true);
+                } else if(Input.GetButtonDown("AttackScissor")) {
+                    //anim.SetTrigger("Scissor");
+                }
+            }
+        }
+    }
+
+    private void LateUpdate() {
+        if(currentForm != Form.Human && currentForm != Form.Test) {
+            if(IsGrounded())
+                anim.SetBool("Grounded", true);
+            else
+                anim.SetBool("Grounded", false);
+        }
     }
 
     private void FixedUpdate() {
