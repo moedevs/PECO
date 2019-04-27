@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1490682583
+CRC: 378418071
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 38fc909ccb62dc0ac8c9368d2595df16
+    Hash: 1593a5db69ce28d94bff91845caf6dbb
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a127fc45d18a16380f09835e62fa179b
+    Hash: 1e35c554ef41c82dac680a467a253b5d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,11 +34,20 @@ ClassTypes:
 - Class: 95
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: 3dcc0970e2891c440bd2021ae1feea4f, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 4ae38234b2a12c94ea13848d22f53e47, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 143
   Script: {instanceID: 0}
 Assets:
-- Assets/_Prefabs/PecoBear.prefab
+- Assets/_Art/_Animations/PecoBearTest/PecoBearAirAttack.anim
+- Assets/_Art/_Animations/PecoBearTest/PecoBearChargeAttackHit.anim
+- Assets/_Art/_Animations/PecoBearTest/PecoBearAttack.anim
+- Assets/_Art/_Animations/PecoBearTest/PecoBearTest.controller
+- Assets/_Art/_Animations/PecoBearTest/PecoBearCharge.anim
+- Assets/_Prefabs/Player/PecoBear.prefab
+- Assets/_Art/_Animations/PecoBearTest/PecoBearAirAttackLanding.anim
+- Assets/_Art/_Animations/PecoBearTest/PecoBearTest.anim
 Dependencies: []

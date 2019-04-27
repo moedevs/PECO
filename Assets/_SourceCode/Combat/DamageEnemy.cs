@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damage : MonoBehaviour {
+public class DamageEnemy : MonoBehaviour {
 
     public int amount;
 
@@ -12,7 +12,9 @@ public class Damage : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag("PlayerControllable"))
-            HealthSystem.TakeDamage(amount);
+        if(other.CompareTag("Enemy")) {
+            other.GetComponent<EnemyBase>().health -= amount;
+            //other.GetComponent<BehaviorBase>().currentDetection += 5f;
+        }
     }
 }
