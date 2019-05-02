@@ -205,7 +205,7 @@ Transform:
   - {fileID: 322978652}
   - {fileID: 2097331578}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &187297669
 GameObject:
@@ -318,7 +318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlledPawn: {fileID: 342855033}
-  pawnCamera: {fileID: 732681377}
   mask:
     serializedVersion: 2
     m_Bits: 512
@@ -1012,6 +1011,7 @@ GameObject:
   - component: {fileID: 732681378}
   - component: {fileID: 732681377}
   - component: {fileID: 732681376}
+  - component: {fileID: 732681379}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -1076,13 +1076,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732681375}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: 4.23, z: -20.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+--- !u!114 &732681379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732681375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225cc8ccce2f8244fb70125b6834d3e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 2.5
+  horizOffset: 5
+  verticalOffset: 2
+  cameraDir: {x: 0, y: 0, z: 1}
 --- !u!1 &767462864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,7 +2623,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: -30, z: 0}
 --- !u!1 &2026617244
 GameObject:
@@ -2927,7 +2943,7 @@ PrefabInstance:
     - target: {fileID: 839368244058687717, guid: 0043a034ea317324c9c49f7854db5b0e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 839368244058687717, guid: 0043a034ea317324c9c49f7854db5b0e,
         type: 3}
@@ -2996,7 +3012,7 @@ PrefabInstance:
     - target: {fileID: 1952139555233767415, guid: a285d7c77909fe444aabcd810a46e6ba,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1952139555233767415, guid: a285d7c77909fe444aabcd810a46e6ba,
         type: 3}
@@ -3013,11 +3029,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5711645206987943535, guid: a285d7c77909fe444aabcd810a46e6ba,
-        type: 3}
-      propertyPath: attackTimer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1952139555233767412, guid: a285d7c77909fe444aabcd810a46e6ba,
         type: 3}
       propertyPath: patrolPoints.Array.data[0]
@@ -3028,6 +3039,11 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1739506028}
+    - target: {fileID: 5711645206987943535, guid: a285d7c77909fe444aabcd810a46e6ba,
+        type: 3}
+      propertyPath: attackTimer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1509319098955323584, guid: a285d7c77909fe444aabcd810a46e6ba,
         type: 3}
       propertyPath: m_IsActive
