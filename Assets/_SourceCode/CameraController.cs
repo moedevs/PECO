@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
 
     public float rotateSpeed;
     public float horizOffset, verticalOffset;
-    [HideInInspector] public Vector3 cameraDir = Vector3.forward;
+    private Vector3 cameraDir = Vector3.forward;
     private Vector3 posOffset;
     private float angle;
 

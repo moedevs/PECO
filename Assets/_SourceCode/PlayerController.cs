@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
     // PlayerController/movement functionality
     public GameObject controlledPawn;
     private CharacterController pawnController;
-    private Vector3 moveNorm;
-    public LayerMask mask;
+    public float rotationSpeed;
     private bool jumpFlag = false;
+    private Vector3 moveNorm;
     [HideInInspector] public bool canAct;
 
     // Costume/form functionality
@@ -127,10 +127,9 @@ public class PlayerController : MonoBehaviour
     
     private void Movement() {
         // Retrieve inputs
-        moveNorm = Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * formData.walkSpeed;
+        moveNorm = Camera.main.transform.TransformVector(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * formData.walkSpeed);
         moveDirection.x = moveNorm.x;
         moveDirection.z = moveNorm.z;
-        moveDirection = Camera.main.transform.TransformVector(moveDirection);
         
         // Apply gravity and jump
         if(jumpFlag) {
@@ -158,6 +157,8 @@ public class PlayerController : MonoBehaviour
 
         // Apply movement
         pawnController.Move(moveDirection * Time.fixedDeltaTime);
+        if(moveNorm.magnitude > 0.05f)
+            controlledPawn.transform.rotation = Quaternion.Euler(0, Quaternion.RotateTowards(controlledPawn.transform.rotation, Quaternion.LookRotation(moveNorm, Vector3.up), rotationSpeed).eulerAngles.y, 0);
     }
 
     /// <summary>
@@ -165,7 +166,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private bool IsGrounded() {
         //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), Vector3.down, Color.black, 1f, false);
-        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, Quaternion.identity, 0.01f, mask);
+        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, Quaternion.identity, 0.01f, LayerMask.GetMask("Terrain"));
     }
 
     private void ChangeAlpha(float alpha) {

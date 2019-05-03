@@ -318,9 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlledPawn: {fileID: 342855033}
-  mask:
-    serializedVersion: 2
-    m_Bits: 512
+  rotationSpeed: 15
   canAct: 0
   currentForm: 2
   formData: {fileID: 11400000, guid: 3e8cc525288dba04489d5a5d503a3d7a, type: 2}
@@ -1098,7 +1096,6 @@ MonoBehaviour:
   rotateSpeed: 2.5
   horizOffset: 5
   verticalOffset: 2
-  cameraDir: {x: 0, y: 0, z: 1}
 --- !u!1 &767462864
 GameObject:
   m_ObjectHideFlags: 0
