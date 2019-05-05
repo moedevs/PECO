@@ -9,9 +9,9 @@ public class FormManager : MonoBehaviour {
     [HideInInspector] public GameObject humanPawn, testPawn, bearPawn;
 
     public float removeTime;
-    public RectTransform removeBar;
-
+    
     private PlayerController player;
+    private RectTransform removeBar;
     private AssetBundle formBundle, pecoHumanBundle, pecoTestBundle, pecoBearBundle;
     private float holdTime;
 
@@ -25,6 +25,10 @@ public class FormManager : MonoBehaviour {
         // set player FormData
         if(player.formData == null)
             player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");
+    }
+
+    private void Start() {
+        removeBar = CanvasManager.cm.costumeRemoveBar.GetComponent<RectTransform>();
     }
 
     private void Update() {

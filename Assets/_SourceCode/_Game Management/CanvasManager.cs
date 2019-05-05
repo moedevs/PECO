@@ -6,7 +6,7 @@ public class CanvasManager : MonoBehaviour {
 
     public static CanvasManager cm;
 
-    public GameObject pauseMenu, stealthGradient;
+    public GameObject pauseMenu, stealthGradient, costumeRemoveBar;
 
     private void Awake() {
         if(cm == null) {
