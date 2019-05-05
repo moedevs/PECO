@@ -12,12 +12,11 @@ public class PlayerController : MonoBehaviour
     // PlayerController/movement functionality
     public GameObject controlledPawn;
     private CharacterController pawnController;
-    [SerializeField] private Camera pawnCamera;
-    private Vector3 moveNorm;
-    //private RaycastHit hitObj;
-    public LayerMask mask;
+    public float rotationSpeed;
     private bool jumpFlag = false;
+    private Vector3 moveNorm;
     [HideInInspector] public bool canAct;
+    private float speedMultiplier = 1f;
 
     // Costume/form functionality
     [HideInInspector] public Form currentForm;
@@ -27,12 +26,14 @@ public class PlayerController : MonoBehaviour
     // Attacking functionality
     public float attackHoldTimer = 0f;
 
+    // Stealth functionality
+    [HideInInspector] public bool isSneaking;
+
     // Input variables 
     private const float baseSpeed = 12.0f;
     public float speed = baseSpeed;
     public float turnSpeed = 2f;
     Vector3 moveDirection;
-    Vector3 moveRotation;
 
     // Animation variables
     private Animator anim;
@@ -41,10 +42,10 @@ public class PlayerController : MonoBehaviour
      * Speed modifiers for now, this will be
      * generalized later on
      */
-    private Dictionary<string, SpeedEffect> _effects = new Dictionary<string, SpeedEffect>();
+    //private Dictionary<string, SpeedEffect> _effects = new Dictionary<string, SpeedEffect>();
 
     //sets the position of the camera behind each pawn once possessed
-    private Vector3 CameraPosition = new Vector3(0.8f, 2.5f, -4.2f);
+    //private Vector3 CameraPosition = new Vector3(0.8f, 2.5f, -4.2f);
 
     private void Awake() {
         if(pc == null) {
@@ -65,15 +66,6 @@ public class PlayerController : MonoBehaviour
             }
         }
         pawnController = controlledPawn.GetComponent<CharacterController>();
-
-        // Sets the camera to be a child of the controlled pawn
-        if(pawnCamera == null)
-            pawnCamera = Camera.main;
-        pawnCamera.transform.SetParent(controlledPawn.transform);
-
-        // Force set the cameras position 
-        pawnCamera.transform.rotation = Quaternion.Euler(15f, 0f, 0f);
-        pawnCamera.transform.localPosition = CameraPosition;
 
         // Find additional components
         anim = controlledPawn.GetComponent<Animator>();
@@ -118,6 +110,18 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        // Stealth
+        if(Input.GetButtonDown("Sneak")) {
+            isSneaking = !isSneaking;
+            if(isSneaking) {
+                speedMultiplier = 0.5f;
+                CanvasManager.cm.stealthGradient.SetActive(true);
+            } else {
+                speedMultiplier = 1f;
+                CanvasManager.cm.stealthGradient.SetActive(false);
+            }
+        }
     }
 
     private void LateUpdate() {
@@ -135,16 +139,13 @@ public class PlayerController : MonoBehaviour
         // Apply movement
         if(canAct)
             Movement();
-        //RayTrace();
     }
-
+    
     private void Movement() {
         // Retrieve inputs
-        moveNorm = Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * formData.walkSpeed;
+        moveNorm = Camera.main.transform.TransformVector(Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))) * formData.walkSpeed * speedMultiplier);
         moveDirection.x = moveNorm.x;
         moveDirection.z = moveNorm.z;
-        moveRotation = new Vector3(0.0f, Input.GetAxis("CameraX"), 0.0f);
-        moveDirection = controlledPawn.transform.TransformVector(moveDirection);
         
         // Apply gravity and jump
         if(jumpFlag) {
@@ -172,7 +173,8 @@ public class PlayerController : MonoBehaviour
 
         // Apply movement
         pawnController.Move(moveDirection * Time.fixedDeltaTime);
-        pawnController.transform.Rotate((moveRotation * turnSpeed), Space.Self);
+        if(moveNorm.magnitude > 0.05f)
+            controlledPawn.transform.rotation = Quaternion.Euler(0, Quaternion.RotateTowards(controlledPawn.transform.rotation, Quaternion.LookRotation(moveNorm, Vector3.up), rotationSpeed).eulerAngles.y, 0);
     }
 
     /// <summary>
@@ -180,39 +182,35 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private bool IsGrounded() {
         //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), Vector3.down, Color.black, 1f, false);
-        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, Quaternion.identity, 0.01f, mask);
+        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, Quaternion.identity, 0.01f, LayerMask.GetMask("Terrain"));
     }
 
-    private void ChangeAlpha(float alpha)
-    {
+    /*private void ChangeAlpha(float alpha) {
         var mat = controlledPawn.GetComponent<Renderer>().material;
         var oldColor = mat.color;
         var newColor = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
         mat.SetColor("_Color", newColor);
     }
 
-    private void OnSneakBegin()
-    {
+    private void OnSneakBegin() {
         var sneak = new Sneak();
         _effects.Add("Sneak", sneak);
         ChangeAlpha(0.5f);
     }
 
-    private void OnSneakEnd()
-    {
+    private void OnSneakEnd() {
         _effects.Remove("Sneak");
         ChangeAlpha(1f);
-    }
+    }*/
 
     /**
      * Currently only works for speed
      */
-    private void ApplyEffects()
-    {
+    /*private void ApplyEffects() {
         var effects = _effects.Values;
         var newFlat = effects.Aggregate(baseSpeed, (accum, effect) => accum + effect.flat);
         speed = effects.Aggregate(newFlat, (accum, effect) => accum * effect.multiplier);
-    }
+    }*/
 
     public void ChangeControlledPawn(Form newForm) {
         if(newForm == currentForm) {
@@ -254,10 +252,8 @@ public class PlayerController : MonoBehaviour
         controlledPawn.SetActive(true);
         oldPawn.SetActive(false);
 
-        // set camera transform
-        pawnCamera.transform.SetParent(controlledPawn.transform);
-        pawnCamera.transform.localPosition = CameraPosition;
-        pawnCamera.transform.rotation = controlledPawn.transform.rotation * Quaternion.Euler(15.0f, 0f, 0f);
+        // set camera reference
+        CameraController.player = controlledPawn;
 
         // grab additional components
         anim = controlledPawn.GetComponent<Animator>();
