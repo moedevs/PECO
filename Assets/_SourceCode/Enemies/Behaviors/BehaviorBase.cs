@@ -23,7 +23,7 @@ public class BehaviorBase : MonoBehaviour {
     }
 
     protected virtual void Update() {
-        Mathf.Clamp(currentDetection, 0f, overallMaxDetection);
+        currentDetection = Mathf.Clamp(currentDetection, 0f, overallMaxDetection);
 
         if(currentDetection >= detectedLevel)
             OnDetectPlayer();
