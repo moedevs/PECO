@@ -60,3 +60,5 @@ Dist/
 Assets/ProCore/
 Assets/ProCore.meta
 ProjectSettings/ProBuilderSettings.json
+Assets/ProBuilder Data/
+Assets/ProBuilder Data.meta
