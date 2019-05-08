@@ -8,6 +8,7 @@ public class EnemyBase : MonoBehaviour {
     public int maxHealth, baseDamage;
     public float viewRangeAngle, viewRangeDistance, audioListenRange, detectGain, detectLoss, gravity;
 
+    protected float detectLossMultiplier;
     protected bool outOfRange;
     protected GameObject viewRangeLight, player;
     protected BehaviorBase behavior;
@@ -67,24 +68,33 @@ public class EnemyBase : MonoBehaviour {
 
         // Lose interest if player is out of range
         if(outOfRange) {
+            if(behavior.timer >= behavior.giveUpTime) {
+                if(behavior.timer >= 1.5 * behavior.giveUpTime)
+                    detectLossMultiplier = 1.5f;
+                else
+                    detectLossMultiplier = 1;
+                if(PlayerController.pc.isSneaking)
+                    detectLossMultiplier *= 1.5f;
+                detectLossMultiplier *= Time.deltaTime;
+            } else
+                detectLossMultiplier = 0;
             switch(behavior.detectedState) {
                 /*case BehaviorBase.DetectedMode.Unaware:
                     break;*/
                 case BehaviorBase.DetectedMode.Suspicious:
                     behavior.timer += Time.deltaTime;
-                    behavior.currentDetection -= behavior.timer >= behavior.giveUpTime ? detectLoss * Time.deltaTime : 0;
+                    behavior.currentDetection -= detectLoss * detectLossMultiplier;
                     break;
                 case BehaviorBase.DetectedMode.Detected:
-                    behavior.timer += Time.deltaTime * 0.5f;
-                    behavior.currentDetection -= behavior.timer >= behavior.giveUpTime 
-                        ? behavior.timer >= behavior.giveUpTime * 1.5f ? detectGain * Time.deltaTime
-                        : detectLoss * Time.deltaTime * 0.75f : 0;
+                    behavior.timer += Time.deltaTime * 0.75f;
+                    behavior.currentDetection -= detectLoss * detectLossMultiplier * 0.5f;
                     break;
                 default:
                     break;
             }
-        }
-        //Debug.Log("Timer: " + behavior.timer + ", Detection: " + behavior.currentDetection);
+        } else
+            detectLossMultiplier = 0;
+        //Debug.Log("Timer: " + behavior.timer + ", Detection: " + behavior.currentDetection + ", Multiplier: " + (detectLossMultiplier));
     }
 
     protected void OnDestroy() {
