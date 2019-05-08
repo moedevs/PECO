@@ -55,3 +55,8 @@ crashlytics-build.properties
 
 .idea/
 Dist/
+
+# Ignore ProCore and ProBuilder settings
+Assets/ProCore/
+Assets/ProCore.meta
+ProjectSettings/ProBuilderSettings.json
