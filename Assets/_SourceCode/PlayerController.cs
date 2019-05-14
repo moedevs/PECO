@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveNorm;
     [HideInInspector] public bool canAct;
     private float speedMultiplier = 1f;
+    [HideInInspector] public bool grounded, groundedFromCast;
+    private float jumpTimer = 0f;
 
     // Costume/form functionality
     [HideInInspector] public Form currentForm;
@@ -80,7 +82,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         // Movement
-        if(canAct && !jumpFlag && Input.GetButtonDown("Jump") && IsGrounded())
+        if(canAct && !jumpFlag && Input.GetButtonDown("Jump") && grounded)
             jumpFlag = true;
 
         // Attacking
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour
                 attackHoldTimer = 0;
             } else {
                 if(Input.GetButtonDown("AttackStandard")) {
-                    if(!IsGrounded())
+                    if(!grounded)
                         anim.SetTrigger("AirAttack");
                     else {
                         anim.SetTrigger("Attack");
@@ -126,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate() {
         if(currentForm != Form.Human && currentForm != Form.Test) {
-            if(IsGrounded())
+            if(grounded)
                 anim.SetBool("Grounded", true);
             else
                 anim.SetBool("Grounded", false);
@@ -136,6 +138,12 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate() {
         if (controlledPawn == null)
             return;
+        // Check grounded
+        groundedFromCast = IsGrounded();
+        if(jumpTimer > 0f)
+            jumpTimer -= Time.fixedDeltaTime;
+        else
+            jumpTimer = 0f;
         // Apply movement
         if(canAct)
             Movement();
@@ -151,7 +159,8 @@ public class PlayerController : MonoBehaviour
         if(jumpFlag) {
             moveDirection.y = formData.jumpStrength;
             jumpFlag = false;
-        } else if(!IsGrounded()) {
+            jumpTimer = 0.25f;
+        } else if(!grounded) {
             if(moveDirection.y > 0.05f) {
                 if(Input.GetButton("Jump")) {
                     moveDirection.y -= formData.gravityBase;
@@ -166,7 +175,7 @@ public class PlayerController : MonoBehaviour
                 moveDirection.y -= formData.gravityShortHop;
             else
                 moveDirection.y -= formData.gravityBase;
-        } else {
+        } else if(jumpTimer <= 0f) {
             moveDirection.y = 0;
         }
         moveDirection.y = Mathf.Clamp(moveDirection.y, Mathf.Abs(formData.maxFallSpeed) * -1f, 50f);
@@ -182,7 +191,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private bool IsGrounded() {
         //Debug.DrawRay(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), Vector3.down, Color.black, 1f, false);
-        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, Quaternion.identity, 0.01f, LayerMask.GetMask("Terrain"));
+        return jumpFlag ? false : Physics.BoxCast(controlledPawn.transform.position - new Vector3(0, formData.formHeight / 2), formData.groundedSkin, Vector3.down, controlledPawn.transform.rotation, 0.02f, LayerMask.GetMask("Terrain"));
     }
 
     /*private void ChangeAlpha(float alpha) {

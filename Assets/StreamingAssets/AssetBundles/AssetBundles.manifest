@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 869528292
+CRC: 4210269291
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: testcapsule
+      Name: pecobear
       Dependencies: {}
     Info_1:
-      Name: pecobear
+      Name: testcapsule
       Dependencies: {}
     Info_2:
       Name: formdata
