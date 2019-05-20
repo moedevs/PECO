@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
                 moveDirection.y -= formData.gravityShortHop;
             else
                 moveDirection.y -= formData.gravityBase;
-        } else if(jumpTimer <= 0f) {
+        } else if(jumpTimer <= 0f && moveDirection.y <= 0.05f) {
             moveDirection.y = 0;
         }
         moveDirection.y = Mathf.Clamp(moveDirection.y, Mathf.Abs(formData.maxFallSpeed) * -1f, 50f);
