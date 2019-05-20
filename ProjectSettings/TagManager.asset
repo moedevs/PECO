@@ -10,6 +10,7 @@ TagManager:
   - EnemyAttack
   - PlayerAttack
   - Enemy
+  - CostumeGiver
   layers:
   - Default
   - TransparentFX

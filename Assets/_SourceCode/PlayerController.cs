@@ -251,11 +251,12 @@ public class PlayerController : MonoBehaviour
         pawnController = controlledPawn.GetComponent<CharacterController>();
 
         // grab new form data
+        float oldHeight = formData.spawnHeight;
         formManager.GetNewData(currentForm);
 
         // retain current position and rotation
         pawnController.enabled = false;
-        controlledPawn.transform.position = new Vector3(oldPawn.transform.position.x, formData.spawnHeight, oldPawn.transform.position.z);
+        controlledPawn.transform.position = oldPawn.transform.position + new Vector3(0f, -oldHeight + formData.spawnHeight, 0f);
         pawnController.enabled = true;
         controlledPawn.transform.rotation = oldPawn.transform.rotation;
         controlledPawn.SetActive(true);
