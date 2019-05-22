@@ -118,7 +118,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh4276
+  m_Name: pb_Mesh11640
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -308,7 +308,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh4288
+  m_Name: pb_Mesh11652
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -468,7 +468,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh4322
+  m_Name: pb_Mesh11686
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -721,7 +721,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh4230
+  m_Name: pb_Mesh11594
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3792,7 +3792,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh4302
+  m_Name: pb_Mesh11666
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -4536,6 +4536,41 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ExitGame
       objectReference: {fileID: 0}
+    - target: {fileID: 3260377683793405171, guid: daba209c4b2cb734486c448903a43209,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15.501709
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215712164336399444, guid: daba209c4b2cb734486c448903a43209,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.11987305
+      objectReference: {fileID: 0}
+    - target: {fileID: 2967783685477741226, guid: daba209c4b2cb734486c448903a43209,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.930664
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200032340459762745, guid: daba209c4b2cb734486c448903a43209,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.930664
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898041802422060878, guid: daba209c4b2cb734486c448903a43209,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.930664
+      objectReference: {fileID: 0}
+    - target: {fileID: 7688351825486414622, guid: daba209c4b2cb734486c448903a43209,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.930664
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526542608941331879, guid: daba209c4b2cb734486c448903a43209,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.930664
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daba209c4b2cb734486c448903a43209, type: 3}
 --- !u!1 &1591979096
@@ -4642,7 +4677,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh4248
+  m_Name: pb_Mesh11612
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -11433,7 +11468,7 @@ MonoBehaviour:
   dontDestroyMeshOnDelete: 0
   m_selectedFaces: 
   m_SelectedEdges: []
-  m_selectedTriangles: 58000000
+  m_selectedTriangles: 
 --- !u!64 &1670614505
 MeshCollider:
   m_ObjectHideFlags: 0

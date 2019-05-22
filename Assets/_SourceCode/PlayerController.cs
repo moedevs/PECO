@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
         formManager = GetComponent<FormManager>();
         formManager.humanPawn = controlledPawn;
 
-        HealthSystem.updateHP();
+        HealthSystem.UpdateHP();
     }
 
     private void Update() {
