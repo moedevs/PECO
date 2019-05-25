@@ -45,9 +45,8 @@ public class CameraController : MonoBehaviour {
             newPos = player.transform.position + posOffset;
             //Debug.DrawRay(newPos, player.transform.position - newPos, Color.blue, 2f, true);
             if(inWall) {
-            RaycastHit hit;
-            if(Physics.Raycast(player.transform.position, newPos - player.transform.position, out hit, distance, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
-                newPos = hit.point;
+                if(Physics.Raycast(player.transform.position, newPos - player.transform.position, out RaycastHit hit, distance, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
+                    newPos = hit.point;
             }
 
             // Apply offset position
