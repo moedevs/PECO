@@ -1367,6 +1367,11 @@ PrefabInstance:
       propertyPath: controlledPawn
       value: 
       objectReference: {fileID: 819746298}
+    - target: {fileID: 8888831774139312054, guid: 0b9f54eea674a0c4cab60d45646198a2,
+        type: 3}
+      propertyPath: slideFriction
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b9f54eea674a0c4cab60d45646198a2, type: 3}
 --- !u!1 &819746298 stripped
@@ -1375,6 +1380,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2081146089}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &819746304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819746298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b71861d3ecafd48bb25205ba7c3f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitNormal: {x: 0, y: 0, z: 0}
 --- !u!1001 &825145156
 PrefabInstance:
   m_ObjectHideFlags: 0

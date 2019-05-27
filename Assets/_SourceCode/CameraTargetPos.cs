@@ -39,7 +39,7 @@ public class CameraTargetPos : MonoBehaviour {
             rightInWall = true;
         }
         
-        Debug.Log(insideWall);
+        //Debug.Log(insideWall);
 
     }
 
