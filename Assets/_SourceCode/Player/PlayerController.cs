@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void RedirectAirMomentum() {
-        Debug.Log(baseAirMomentum);
+        //Debug.Log(baseAirMomentum);
         if(baseAirMomentum.magnitude > 0) {
             moveDirection.x = baseAirMomentum.x + (moveDirection.x * 0.4f);
             moveDirection.z = baseAirMomentum.z + (moveDirection.z * 0.4f);
@@ -300,9 +300,7 @@ public class PlayerController : MonoBehaviour
         formManager.GetNewData(currentForm);
 
         // retain current position and rotation
-        pawnController.enabled = false;
-        controlledPawn.transform.position = oldPawn.transform.position + new Vector3(0f, -oldHeight + formData.spawnHeight, 0f);
-        pawnController.enabled = true;
+        TeleportPlayer(oldPawn.transform.position + new Vector3(0f, -oldHeight + formData.spawnHeight, 0f));
         controlledPawn.transform.rotation = oldPawn.transform.rotation;
         controlledPawn.SetActive(true);
         oldPawn.SetActive(false);
@@ -313,5 +311,12 @@ public class PlayerController : MonoBehaviour
         // grab additional components
         anim = controlledPawn.GetComponent<Animator>();
         //playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+    }
+
+    // Teleports player to destination
+    public void TeleportPlayer(Vector3 destination) {
+        pawnController.enabled = false;
+        controlledPawn.transform.position = destination;
+        pawnController.enabled = true;
     }
 }

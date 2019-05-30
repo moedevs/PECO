@@ -21,11 +21,12 @@ public class HealthSystem : MonoBehaviour
     }
 
     public static void UpdateHP() {
-        if (health > maxHealth) {
+        if(health > maxHealth) {
             health = maxHealth;
-        }
-        if (health <= 0) {
-            dead = true;
+        } else if(health <= 0) {
+            //dead = true;
+            health = maxHealth;
+            LevelData.data.RespawnPlayer();
         }
         GameObject text = GameObject.Find("HPText");
         text.GetComponent<UnityEngine.UI.Text>().text = "HP: " + health;

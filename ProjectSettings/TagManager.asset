@@ -42,7 +42,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Respawn
   - Camera
   m_SortingLayers:
   - name: Default
