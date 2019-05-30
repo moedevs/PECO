@@ -1,13 +1,17 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour {
 
     public static CanvasManager cm;
 
-    public GameObject pauseMenu, stealthGradient, costumeRemoveBar;
+    public GameObject pauseMenu, stealthGradient, costumeRemoveBar, healthBar;
+    public Sprite fullHeart, emptyHeart;
 
+    [HideInInspector] public List<Image> healthSprites;
+    
     private void Awake() {
         if(cm == null) {
             cm = this;
@@ -16,13 +20,16 @@ public class CanvasManager : MonoBehaviour {
             Destroy(gameObject);
         pauseMenu.SetActive(false);
         stealthGradient.SetActive(false);
+        foreach(Transform child in healthBar.transform)
+            healthSprites.Add(child.GetComponent<Image>());
     }
 
     private void OnDestroy() {
         foreach(Transform child in transform) {
             foreach(Transform subchild in child) {
-                foreach(Transform subsubchild in subchild)
+                foreach(Transform subsubchild in subchild) {
                     Destroy(subsubchild.gameObject);
+                }
                 Destroy(subchild.gameObject);
             }
             Destroy(child.gameObject);

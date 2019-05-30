@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -62,7 +62,14 @@ public class PatrolBasic : BehaviorBase {
     }
 
     protected bool AtDestination() {
-        return Vector3.Distance(transform.position, patrolPoints[currentPoint].position) <= 0.1f;
+        bool atDest = Vector3.Distance(transform.position, patrolPoints[currentPoint].position) <= 0.2f;
+        if(!atDest && Mathf.Abs(transform.position.y - patrolPoints[currentPoint].position.y) <= 1.25f) {
+            Vector3 xzPos = new Vector3(transform.position.x, 0, transform.position.z);
+            Vector3 xzDest = new Vector3(patrolPoints[currentPoint].position.x, 0, patrolPoints[currentPoint].position.z);
+            if(Vector3.Distance(xzPos, xzDest) <= 0.1f)
+                atDest = true;
+        }
+        return atDest;
     }
 
     protected IEnumerator StartWait() {

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +9,14 @@ public class CameraController : MonoBehaviour {
     public float rotateSpeed;
     public float horizOffset, verticalOffset;
     private Vector3 cameraDir = Vector3.forward;
-    private Vector3 posOffset;
-    private float angle;
+    private Vector3 posOffset, newPos;
+    private float angle, distance;
+
+    // Wall collision detection
+    private bool inWall;
+    private CameraTargetPos targetPos;
+    private Vector3 targetOffset = new Vector3(0, 0, 0.3f);
+    private Vector3 setPos;
 
     private void Start() {
         if(Camera.main != GetComponent<Camera>()) {
@@ -25,6 +31,9 @@ public class CameraController : MonoBehaviour {
         if(player == null)
             player = PlayerController.pc.controlledPawn;
         tag = "MainCamera";
+        //distance = Mathf.Sqrt(Mathf.Pow(horizOffset, 2f) + Mathf.Pow(verticalOffset, 2f));
+        distance = horizOffset;
+        targetPos = CameraTargetPos.target.GetComponent<CameraTargetPos>();
     }
 
     private void LateUpdate() {
@@ -37,12 +46,56 @@ public class CameraController : MonoBehaviour {
                 angle += 360f;
             cameraDir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0f, Mathf.Cos(angle * Mathf.Deg2Rad));
 
-            // Apply offset position
+            // Calculate position
+            targetPos.transform.position = newPos + transform.TransformVector(targetOffset);
+            targetPos.transform.rotation = Quaternion.Euler(5, angle, 0);
             posOffset = Vector3.Normalize(cameraDir) * -horizOffset;
             posOffset.y = verticalOffset;
-            transform.position = player.transform.position + posOffset;
+            newPos = player.transform.position + posOffset;
+            if(targetPos.leftInWall) {
+                /*if(inWall) {
+                    Debug.Log("adjusting");
+                    newPos += transform.TransformVector(Vector3.right) * targetPos.leftDist;
+                    setPos = newPos;
+                }*/
+            } else if(targetPos.rightInWall) {
+
+            } else {
+                setPos = newPos;
+            }
+            
+            // Prevent camera from going inside walls
+            //Debug.DrawRay(newPos, player.transform.position - newPos, Color.blue, 2f, true);
+            if(inWall) {
+                if(Physics.Raycast(player.transform.position, newPos - player.transform.position, out RaycastHit hit, distance, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore)) {
+                    newPos = hit.point;
+                    if(targetPos.leftInWall) {
+                        if(!targetPos.rightInWall)
+                            setPos = newPos + transform.TransformVector(Vector3.right) * targetPos.leftDist;
+                    } else if(targetPos.rightInWall) {
+                        setPos = newPos + transform.TransformVector(Vector3.left) * targetPos.rightDist;
+                    } else {
+                        transform.position = newPos;
+                        transform.rotation = Quaternion.Euler(5, angle, 0);
+                        return;
+                    }
+                }
+            }
+
+            // Apply offset position
+            transform.position = setPos;
             transform.rotation = Quaternion.Euler(5, angle, 0);
         }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("Terrain"))
+            inWall = true;
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if(other.CompareTag("Terrain"))
+            inWall = false;
     }
 
 }
