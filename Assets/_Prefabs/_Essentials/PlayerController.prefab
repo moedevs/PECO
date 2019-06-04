@@ -47,6 +47,9 @@ MonoBehaviour:
   controlledPawn: {fileID: 0}
   rotationSpeed: 15
   canAct: 0
+  slideFriction: 0.15
+  grounded: 0
+  groundedFromCast: 0
   currentForm: 2
   formData: {fileID: 11400000, guid: 3e8cc525288dba04489d5a5d503a3d7a, type: 2}
   attackHoldTimer: 0

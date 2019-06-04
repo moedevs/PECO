@@ -627,6 +627,7 @@ GameObject:
   - component: {fileID: 726576753}
   - component: {fileID: 726576752}
   - component: {fileID: 5296755408752467472}
+  - component: {fileID: 8480470594291255659}
   m_Layer: 10
   m_Name: PecoBear
   m_TagString: PlayerControllable
@@ -705,6 +706,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8480470594291255659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726576751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b71861d3ecafd48bb25205ba7c3f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitNormal: {x: 0, y: 0, z: 0}
 --- !u!1 &821355590
 GameObject:
   m_ObjectHideFlags: 0

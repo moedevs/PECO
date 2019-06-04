@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 394508018
+CRC: 766193322
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -14,7 +14,7 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
-- Assets/_SourceCode/Form Data/BearData.asset
-- Assets/_SourceCode/Form Data/TestCapsuleData.asset
-- Assets/_SourceCode/Form Data/HumanData.asset
+- Assets/_SourceCode/Player/Form Data/BearData.asset
+- Assets/_SourceCode/Player/Form Data/TestCapsuleData.asset
+- Assets/_SourceCode/Player/Form Data/HumanData.asset
 Dependencies: []

@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool grounded, groundedFromCast;
     private float jumpTimer = 0f, baseJumpY;
     private Vector3 baseAirMomentum;
-    //private PlayerCollisions playerColls;
+    private PlayerCollisions playerColls;
 
     // Costume/form functionality
     [HideInInspector] public Form currentForm;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         pawnController = controlledPawn.GetComponent<CharacterController>();
-        //playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+        playerColls = controlledPawn.GetComponent<PlayerCollisions>();
 
         // Find additional components
         anim = controlledPawn.GetComponent<Animator>();
@@ -219,12 +219,12 @@ public class PlayerController : MonoBehaviour
 
 
     private bool SlideOffSurface() {
-        /*if(Vector3.Angle(Vector3.up, playerColls.hitNormal) >= 65f) {
+        if(Vector3.Angle(Vector3.up, playerColls.hitNormal) >= 70f) {
             moveDirection.x = (1 - playerColls.hitNormal.y) * playerColls.hitNormal.x * (1f - slideFriction);
             moveDirection.z = (1 - playerColls.hitNormal.y) * playerColls.hitNormal.z * (1f - slideFriction);
             //Debug.Log("sliding");
             return true;
-        }*/
+        }
         return false;
     }
 
@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour
 
         // grab additional components
         anim = controlledPawn.GetComponent<Animator>();
-        //playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+        playerColls = controlledPawn.GetComponent<PlayerCollisions>();
     }
 
     // Teleports player to destination
