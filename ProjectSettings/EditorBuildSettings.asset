@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu.unity
     guid: 5d0642be1abe98442811212dc5943b87
   - enabled: 1
+    path: Assets/_Scenes/AlphaSandbox.unity
+    guid: 5de26694b502111409795597ff8cc5ae
+  - enabled: 1
     path: Assets/_Scenes/TestScene.unity
     guid: 5b88b75230cdd2c40911b507bba07353
   m_configObjects: {}

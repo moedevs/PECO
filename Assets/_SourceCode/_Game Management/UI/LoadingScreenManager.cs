@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -46,6 +46,7 @@ public class LoadingScreenManager : MonoBehaviour {
         GameManager.gm.ph.canPause = true;
         GameManager.gm.ph.paused = false;
         //PlayerController.pc.canAct = true;
+        CanvasManager.cm.GetComponent<Canvas>().enabled = true;
         canvas.enabled = false;
     }
 
