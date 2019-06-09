@@ -15,4 +15,4 @@ Most discussion will be in the `#peco-main` channel.
 
 Because blue is so stubborn, you will have to request access to these channels.
 
-##### Made with <3 by the /r/NewGame community
+##### Made with <3 by the New Game community
