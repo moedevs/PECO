@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool grounded, groundedFromCast;
     private float jumpTimer = 0f, baseJumpY;
     private Vector3 baseAirMomentum;
-    //private PlayerCollisions playerColls;
+    private PlayerCollisions playerColls;
 
     // Costume/form functionality
     [HideInInspector] public Form currentForm;
@@ -64,16 +64,17 @@ public class PlayerController : MonoBehaviour
         canAct = true;
 
         // set controlledPawn
-        if(controlledPawn == null) {
+        /*if(controlledPawn == null) {
             try {
                 controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
             } catch {
                 Debug.LogError("Unable to find object with tag \"PlayarControllable\", unable to set controlled Player.");
                 return;
             }
-        }
+        }*/
+        FindNewPawn(false);
         pawnController = controlledPawn.GetComponent<CharacterController>();
-        //playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+        playerColls = controlledPawn.GetComponent<PlayerCollisions>();
 
         // Find additional components
         anim = controlledPawn.GetComponent<Animator>();
@@ -219,17 +220,17 @@ public class PlayerController : MonoBehaviour
 
 
     private bool SlideOffSurface() {
-        /*if(Vector3.Angle(Vector3.up, playerColls.hitNormal) >= 65f) {
+        if(Vector3.Angle(Vector3.up, playerColls.hitNormal) >= 70f) {
             moveDirection.x = (1 - playerColls.hitNormal.y) * playerColls.hitNormal.x * (1f - slideFriction);
             moveDirection.z = (1 - playerColls.hitNormal.y) * playerColls.hitNormal.z * (1f - slideFriction);
             //Debug.Log("sliding");
             return true;
-        }*/
+        }
         return false;
     }
 
     private void RedirectAirMomentum() {
-        Debug.Log(baseAirMomentum);
+        //Debug.Log(baseAirMomentum);
         if(baseAirMomentum.magnitude > 0) {
             moveDirection.x = baseAirMomentum.x + (moveDirection.x * 0.4f);
             moveDirection.z = baseAirMomentum.z + (moveDirection.z * 0.4f);
@@ -300,9 +301,7 @@ public class PlayerController : MonoBehaviour
         formManager.GetNewData(currentForm);
 
         // retain current position and rotation
-        pawnController.enabled = false;
-        controlledPawn.transform.position = oldPawn.transform.position + new Vector3(0f, -oldHeight + formData.spawnHeight, 0f);
-        pawnController.enabled = true;
+        TeleportPlayer(oldPawn.transform.position + new Vector3(0f, -oldHeight + formData.spawnHeight, 0f));
         controlledPawn.transform.rotation = oldPawn.transform.rotation;
         controlledPawn.SetActive(true);
         oldPawn.SetActive(false);
@@ -312,6 +311,37 @@ public class PlayerController : MonoBehaviour
 
         // grab additional components
         anim = controlledPawn.GetComponent<Animator>();
-        //playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+        playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+    }
+
+    // Finds a new base pawn; used when changing scenes
+    public void FindNewPawn(bool debug = true) {
+        if(controlledPawn == null) {
+            try {
+                controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
+            } catch {
+                Debug.LogError("Unable to find object with tag \"PlayerControllable\", unable to set controlled Player.");
+                return;
+            }
+            pawnController = controlledPawn.GetComponent<CharacterController>();
+            playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+            anim = controlledPawn.GetComponent<Animator>();
+        } else if(debug) {
+            //Debug.Log("Attempting to find new pawn for player when one is already set.");
+        }
+        pawnController = controlledPawn.GetComponent<CharacterController>();
+        playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+        anim = controlledPawn.GetComponent<Animator>();
+        try {
+            formManager.GetNewData(currentForm);
+        } catch { }
+        //Debug.Log(controlledPawn);
+    }
+
+    // Teleports player to destination
+    public void TeleportPlayer(Vector3 destination) {
+        pawnController.enabled = false;
+        controlledPawn.transform.position = destination;
+        pawnController.enabled = true;
     }
 }
