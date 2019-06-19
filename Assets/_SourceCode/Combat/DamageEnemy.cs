@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,7 @@ public class DamageEnemy : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("Enemy")) {
             other.GetComponent<EnemyBase>().health -= amount;
+            other.GetComponent<BehaviorBase>().currentDetection += 10f;
             //other.GetComponent<BehaviorBase>().currentDetection += 5f;
         }
     }

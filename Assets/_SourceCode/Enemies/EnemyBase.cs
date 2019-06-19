@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,7 +49,7 @@ public class EnemyBase : MonoBehaviour {
             player = PlayerController.pc.controlledPawn;
 
         // Test if player is within field of view
-        if(Vector3.Distance(transform.position, player.transform.position) <= viewRangeDistance && 
+        if(!LoadingScreenManager.ls.loading && Vector3.Distance(transform.position, player.transform.position) <= viewRangeDistance && 
             Vector3.Angle(transform.forward, player.transform.position - transform.position) <= viewRangeAngle / 2) {
             RaycastHit hit;
             if(Physics.Raycast(transform.position, player.transform.position - transform.position, out hit, viewRangeDistance, LayerMask.GetMask("Terrain", "Player"))) {

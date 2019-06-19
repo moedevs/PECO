@@ -8,8 +8,8 @@ public class MainMenuManager : MonoBehaviour {
     public Canvas mainMenu, optionsMenu, creditsMenu;
 
     private void Awake() {
-        GameManager.gm.ph.canPause = false;
-        GameManager.gm.ph.paused = true;
+        PauseHandler.canPause = false;
+        PauseHandler.paused = true;
 
         mainMenu.enabled = true;
         optionsMenu.enabled = false;

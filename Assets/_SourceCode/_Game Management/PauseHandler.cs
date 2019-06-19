@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PauseHandler : MonoBehaviour {
 
-    private GameObject pauseMenu;
+    private static GameObject pauseMenu;
     private float timeMarker;
-    [HideInInspector] public bool paused, canPause;
+    [HideInInspector] public static bool paused, canPause;
 
     void Awake() {
         timeMarker = 1f;
@@ -41,6 +41,10 @@ public class PauseHandler : MonoBehaviour {
         } catch {
             Debug.LogError("Pause Menu reference does not exist. Was the menu deleted, did the scene change, or was the reference not set?");
         }
+    }
+
+    public static void SetMenu(bool toggle) {
+        pauseMenu.SetActive(toggle);
     }
 
     private void MouseLock() {

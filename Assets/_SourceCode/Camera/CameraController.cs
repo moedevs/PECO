@@ -46,6 +46,10 @@ public class CameraController : MonoBehaviour {
                 angle += 360f;
             cameraDir = new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0f, Mathf.Cos(angle * Mathf.Deg2Rad));
 
+            // Detect if player's controlled pawn changed, and reset reference if so
+            if(player != PlayerController.pc.controlledPawn)
+                player = PlayerController.pc.controlledPawn;
+
             // Calculate position
             targetPos.transform.position = newPos + transform.TransformVector(targetOffset);
             targetPos.transform.rotation = Quaternion.Euler(5, angle, 0);

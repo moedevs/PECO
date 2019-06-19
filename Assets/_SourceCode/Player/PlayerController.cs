@@ -64,14 +64,15 @@ public class PlayerController : MonoBehaviour
         canAct = true;
 
         // set controlledPawn
-        if(controlledPawn == null) {
+        /*if(controlledPawn == null) {
             try {
                 controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
             } catch {
                 Debug.LogError("Unable to find object with tag \"PlayarControllable\", unable to set controlled Player.");
                 return;
             }
-        }
+        }*/
+        FindNewPawn(false);
         pawnController = controlledPawn.GetComponent<CharacterController>();
         playerColls = controlledPawn.GetComponent<PlayerCollisions>();
 
@@ -311,6 +312,30 @@ public class PlayerController : MonoBehaviour
         // grab additional components
         anim = controlledPawn.GetComponent<Animator>();
         playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+    }
+
+    // Finds a new base pawn; used when changing scenes
+    public void FindNewPawn(bool debug = true) {
+        if(controlledPawn == null) {
+            try {
+                controlledPawn = GameObject.FindGameObjectsWithTag("PlayerControllable")[0];
+            } catch {
+                Debug.LogError("Unable to find object with tag \"PlayerControllable\", unable to set controlled Player.");
+                return;
+            }
+            pawnController = controlledPawn.GetComponent<CharacterController>();
+            playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+            anim = controlledPawn.GetComponent<Animator>();
+        } else if(debug) {
+            //Debug.Log("Attempting to find new pawn for player when one is already set.");
+        }
+        pawnController = controlledPawn.GetComponent<CharacterController>();
+        playerColls = controlledPawn.GetComponent<PlayerCollisions>();
+        anim = controlledPawn.GetComponent<Animator>();
+        try {
+            formManager.GetNewData(currentForm);
+        } catch { }
+        //Debug.Log(controlledPawn);
     }
 
     // Teleports player to destination

@@ -24,6 +24,18 @@ public class CanvasManager : MonoBehaviour {
             healthSprites.Add(child.GetComponent<Image>());
     }
 
+    public void PauseGame() {
+        GameManager.ph.PauseGame();
+    }
+
+    public void ExitGame() {
+        GameManager.gm.ExitGame();
+    }
+
+    public void LoadScene(string scene) {
+        LoadingScreenManager.ls.LoadNewScene(scene);
+    }
+
     private void OnDestroy() {
         foreach(Transform child in transform) {
             foreach(Transform subchild in child) {

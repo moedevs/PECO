@@ -7,6 +7,8 @@ public class LoadingScreenManager : MonoBehaviour {
     
     public static LoadingScreenManager ls;
 
+    public bool loading = false;
+
     private Canvas canvas;
 
     private void Awake() {
@@ -28,12 +30,17 @@ public class LoadingScreenManager : MonoBehaviour {
 
     private IEnumerator LoadCoroutine(string newScene) {
         // Disable pausing and movement
-        GameManager.gm.ph.canPause = false;
-        GameManager.gm.ph.paused = true;
-        //PlayerController.pc.canAct = false;
+        PauseHandler.canPause = false;
+        PauseHandler.paused = true;
+        Time.timeScale = 0;
+        try {
+            PlayerController.pc.currentForm = PlayerController.Form.Test;
+            PlayerController.pc.canAct = false;
+        } catch { }
 
         // Activate loading screen
         canvas.enabled = true;
+        loading = true;
 
         // Load and unload scenes
         Scene oldScene = SceneManager.GetActiveScene();
@@ -43,11 +50,21 @@ public class LoadingScreenManager : MonoBehaviour {
         yield return null;
 
         // Enable pausing and movement, deactivate loading screen
-        GameManager.gm.ph.canPause = true;
-        GameManager.gm.ph.paused = false;
-        //PlayerController.pc.canAct = true;
+        try {
+            PlayerController.pc.canAct = true;
+        } catch { }
         CanvasManager.cm.GetComponent<Canvas>().enabled = true;
+        if(newScene != "MainMenu") {
+            PlayerController.pc.FindNewPawn();
+            yield return new WaitForSecondsRealtime(0.05f);
+            PauseHandler.canPause = true;
+            PauseHandler.paused = false;
+            Time.timeScale = 1;
+        } else {
+            PauseHandler.SetMenu(false);
+        }
         canvas.enabled = false;
+        loading = false;
     }
 
 }

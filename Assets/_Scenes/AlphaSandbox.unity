@@ -751,30 +751,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4285c06ef07a69d4ca05e2d96c0a1060, type: 3}
---- !u!114 &464568810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 714765047, guid: 4285c06ef07a69d4ca05e2d96c0a1060,
-    type: 3}
-  m_PrefabInstance: {fileID: 416948324}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127777c21abb40840a9f2a859312bde5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &464568811 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6205224658760313472, guid: 4285c06ef07a69d4ca05e2d96c0a1060,
-    type: 3}
-  m_PrefabInstance: {fileID: 416948324}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 055616b55225d91408bdc6b8a63a4d17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &479924648
 GameObject:
   m_ObjectHideFlags: 0
@@ -5822,26 +5798,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3260377683735303756, guid: daba209c4b2cb734486c448903a43209,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 464568810}
-    - target: {fileID: 3260377683735303756, guid: daba209c4b2cb734486c448903a43209,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PauseGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 3260377684585065260, guid: daba209c4b2cb734486c448903a43209,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 464568811}
-    - target: {fileID: 3260377684585065260, guid: daba209c4b2cb734486c448903a43209,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 3260377683793405171, guid: daba209c4b2cb734486c448903a43209,
         type: 3}
@@ -18141,7 +18097,7 @@ PrefabInstance:
     - target: {fileID: 1008756910179318607, guid: a72c30ada5a589949b91865b21168177,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1008756910179318640, guid: a72c30ada5a589949b91865b21168177,
         type: 3}

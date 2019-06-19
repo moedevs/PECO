@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -14,14 +14,18 @@ public class FormManager : MonoBehaviour {
     private RectTransform removeBar;
     private AssetBundle formBundle, pecoHumanBundle, pecoTestBundle, pecoBearBundle;
     private float holdTime;
+    private static bool loaded = false;
 
     private void Awake() {
         player = GetComponent<PlayerController>();
         // load AssetBundles
-        LoadBundle("formdata");
-        //LoadBundle("pecohuman");
-        LoadBundle("pecobear");
-        LoadBundle("testcapsule");
+        if(!loaded) {
+            LoadBundle("formdata");
+            //LoadBundle("pecohuman");
+            LoadBundle("pecobear");
+            LoadBundle("testcapsule");
+            loaded = true;
+        }
         // set player FormData
         if(player.formData == null)
             player.formData = formBundle.LoadAsset<FormDataBase>("TestCapsuleData");

@@ -30,7 +30,7 @@ public class LevelData : MonoBehaviour {
         if(debugRespawn) {
             RespawnPlayer();
             debugRespawn = false;
-        } else if(PlayerController.pc.controlledPawn.transform.position.y < minYPos) 
+        } else if(!LoadingScreenManager.ls.loading && PlayerController.pc.controlledPawn.transform.position.y < minYPos) 
             RespawnPlayer();
     }
 

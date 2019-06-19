@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 5
+  maxHealth: 7
   baseDamage: 1
   viewRangeAngle: 75
   viewRangeDistance: 10
@@ -270,7 +270,7 @@ MonoBehaviour:
   detectGain: 30
   detectLoss: 10
   gravity: 0.5
-  attackTimer: 0
+  attackTimer: 0.75
 --- !u!114 &1952139555233767412
 MonoBehaviour:
   m_ObjectHideFlags: 0
